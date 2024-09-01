@@ -2,7 +2,23 @@
     position: relative;
     left: 0;
     top: 0;
-    background-color: deeppink;
+    background-color: var(--bg-2);
     width: 100%;
     height: calc(100% - 84px);
+    display: flex;
+}
+
+.left-menu-area {
+    width: 300px;
+    border-right: 2px solid #fff;
+    transition: all 225ms ease-in-out;   
+}
+
+.left-menu-top {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.shrink {
+    width: 56px;
 }
