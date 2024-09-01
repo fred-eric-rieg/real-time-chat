@@ -9,6 +9,15 @@
             </button>
         </div>
 
+        <div class="left-menu-bottom" *ngIf="!isShrunk">
+            <button mat-button>Threads <mat-icon>chevron_right</mat-icon></button>
+            <button mat-button>Channels <mat-icon>chevron_right</mat-icon></button>
+            <button mat-button>Direct Messages <mat-icon>chevron_right</mat-icon></button>
+            <span>...</span>
+            <span>Current Channel</span>
+            <span>Channel Members</span>
+        </div>
+
 
     </div>
 
