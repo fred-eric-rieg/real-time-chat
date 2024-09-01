@@ -1,10 +1,14 @@
 <mat-drawer-container autosize class="sidenav-container">
 
     <mat-drawer #drawer class="sidenav" mode="side">
+
+        <div class="top-area">
+            <button mat-icon-button (click)="drawer.toggle()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
         
-        <button mat-icon-button (click)="drawer.toggle()">
-            <mat-icon>close</mat-icon>
-        </button>
+        
 
     </mat-drawer>
 
