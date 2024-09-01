@@ -1,0 +1,21 @@
+<mat-drawer-container class="sidenav-container" autosize>
+
+    <mat-drawer #drawer class="sidenav" mode="side">
+        <p>Auto-resizing sidenav</p>
+        @if (showFiller) {
+        <p>Lorem, ipsum dolor sit amet consectetur.</p>
+        }
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+            Toggle extra text
+        </button>
+    </mat-drawer>
+
+    <div class="sidenav-content">
+        <button mat-mini-fab (click)="drawer.toggle()" *ngIf="drawer.open">
+            <mat-icon *ngIf="!drawer.opened">chevron_right</mat-icon>
+            <mat-icon *ngIf="drawer.opened">chevron_left</mat-icon>
+        </button>
+    </div>
+
+
+</mat-drawer-container>
