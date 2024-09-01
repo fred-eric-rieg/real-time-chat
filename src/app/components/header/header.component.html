@@ -1,8 +1,8 @@
 <div class="header">
     <ng-container *ngIf="drawer != null">
-        <button mat-mini-fab (click)="drawer()?.toggle()" class="sidenav-toggle-btn">
-            <mat-icon *ngIf="!drawer()?.opened">chevron_right</mat-icon>
-            <mat-icon *ngIf="drawer()?.opened">chevron_left</mat-icon>
+        <button mat-icon-button (click)="drawer()?.toggle()" class="sidenav-toggle-btn">
+            <mat-icon *ngIf="!drawer()?.opened">menu</mat-icon>
+            <mat-icon *ngIf="drawer()?.opened">close</mat-icon>
         </button>
         
     </ng-container>
