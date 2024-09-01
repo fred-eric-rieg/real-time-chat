@@ -1,0 +1,42 @@
+.sidenav-container {
+    width: 100%;
+    height: 100%;
+}
+
+.sidenav-content {
+    display: flex;
+    height: 100%;
+    position: relative;
+}
+
+.sidenav {
+    padding: 20px;
+    background-color:rgb(231, 212, 136);
+}
+
+.sidenav-toggle-btn {
+    position: absolute;
+    left: 32px;
+    top: 16px;
+    z-index: 3;
+}
+
+.router-container {
+    width: 100%;
+}
+
+.content-container {
+    position: absolute;
+    top: 100px;
+    left: 16px;
+    background-color: aquamarine;
+    width: calc(100% - 16px);
+    height: calc(100% - 100px);
+    padding: 20px;
+    box-sizing: border-box;
+    border-top-left-radius: 16px;
+}
+
+.header-container {
+    width: 100%;
+}

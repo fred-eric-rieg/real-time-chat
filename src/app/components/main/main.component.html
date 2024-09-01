@@ -11,11 +11,26 @@
     </mat-drawer>
 
     <div class="sidenav-content">
-        <button mat-mini-fab (click)="drawer.toggle()" *ngIf="drawer.open">
+
+        <div class="header-container">
+            <app-header></app-header>
+        </div>
+        
+
+        <button mat-mini-fab (click)="drawer.toggle()" *ngIf="drawer.open" class="sidenav-toggle-btn">
             <mat-icon *ngIf="!drawer.opened">chevron_right</mat-icon>
             <mat-icon *ngIf="drawer.opened">chevron_left</mat-icon>
         </button>
+
+        <div class="content-container">
+            <h2>Content</h2>
+            <router-outlet />
+        </div>
+        
     </div>
+
+
+
 
 
 </mat-drawer-container>
