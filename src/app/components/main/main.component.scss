@@ -12,18 +12,23 @@
     width: 300px;
     border-right: 2px solid var(--border);
     transition: all 225ms ease-in-out;   
+    box-sizing: border-box;
 }
 
 .left-menu-top {
     display: flex;
     flex-direction: row-reverse;
+    padding-top: 20px;
+    box-sizing: border-box;
 }
 
 .left-menu-bottom {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
 }
 
 .shrink {
