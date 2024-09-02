@@ -29,7 +29,6 @@ export class QuillBubbleComponent {
 
   changedEditor(event: EditorChangeContent | EditorChangeSelection | any) {
     const editor = event.editor.root;
-    console.log(editor.innerHTML);
   }
 
   focus($event: any) {
@@ -37,19 +36,9 @@ export class QuillBubbleComponent {
     this.blurred = false;
   }
 
-  nativeFocus($event: any) {
-
-  }
-
   blur($event: any) {
-    console.log('blur', $event);
     this.focused = false;
     this.blurred = true;
-  }
-
-
-  nativeBlur($event: any) {
-
   }
 
 }
