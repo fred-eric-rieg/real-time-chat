@@ -21,7 +21,7 @@ export class SidenavComponent implements AfterViewInit, OnInit {
   showChannels = false;
   showDMs = false;
 
-  channel!: Signal<Channel[]>;
+  channel!: Signal<Channel>;
   channels!: Signal<Channel[]>;
 
   directMessage!: Signal<Channel[]>;
@@ -47,7 +47,7 @@ export class SidenavComponent implements AfterViewInit, OnInit {
 
 
   switchToChannel(channel: Channel) {
-    this.dataService.setCurrentChannel([channel]);
+    this.dataService.setCurrentChannel(channel);
     this.drawer.toggle();
   }
 

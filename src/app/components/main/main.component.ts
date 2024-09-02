@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
 
   isShrunk = false;
 
-  channel!: Signal<Channel[]>;
+  channel!: Signal<Channel>;
   channels!: Signal<Channel[]>;
 
   directMessage!: Signal<Channel[]>;
@@ -39,6 +39,10 @@ export class MainComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.dataService.fetchUser();
+    this.dataService.fetchChannels();
+    this.dataService.fetchDirectMessages();
+    this.dataService.fetchMessages(1);
     this.user = this.dataService.getUser();
     this.channel = this.dataService.getCurrentChannel();
     this.channels = this.dataService.getAllChannels();
@@ -63,9 +67,8 @@ export class MainComponent implements OnInit {
 
 
   switchToChannel(channel: Channel) {
-    this.dataService.setCurrentChannel([channel]);
-    this.dataService.setMessages(channel.id);
-    this.dataService.getMessages();
+    this.dataService.setCurrentChannel(channel);
+    this.dataService.fetchMessages(channel.id);
   }
 
 

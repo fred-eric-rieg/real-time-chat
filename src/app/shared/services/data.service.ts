@@ -32,10 +32,10 @@ export class DataService {
     {
       fullName: "Hans Dieter",
       id: 1,
-  }
+    }
 
 
-  dummyMessages:  Message[] = [
+  dummyMessages: Message[] = [
     {
       id: 1,
       created: new Date(),
@@ -43,11 +43,11 @@ export class DataService {
       content: "First Message of the Day.",
       channel: 1
     },
-    
+
   ]
 
 
-  dummyCurrentChannel: Channel[] = [
+  dummyCurrentChannel: Channel =
     {
       id: 1,
       created: new Date(),
@@ -63,7 +63,6 @@ export class DataService {
         { fullName: "Ingrid Kaiser", id: 6 },
       ]
     }
-  ]
 
 
   dummyAllChannels: Channel[] = [
@@ -147,7 +146,7 @@ export class DataService {
 
   private user = signal<Member>({ id: 0, fullName: "Administrator" });
 
-  private currentChannel = signal<Channel[]>([]);
+  private currentChannel = signal<Channel>(this.dummyCurrentChannel);
 
   private allChannels = signal<Channel[]>([]);
 
@@ -159,21 +158,9 @@ export class DataService {
 
 
   constructor() {
-    // Testdaten
-    this.setUser(this.dummyUser);
-    this.setCurrentChannel(this.dummyCurrentChannel);
-
-    let filteredChannels = this.dummyAllChannels.filter(channel => channel.members.some(member => member.id === this.dummyUser.id));
-
-    this.setAllChannels(filteredChannels);
-
-    let filteredDMs = this.dummyAllDMs.filter(dm => dm.members.some(member => member.id === this.dummyUser.id));
-
-    this.setAllDirectMessages(filteredDMs);
-
-    this.setMessages(1); // For demo the messages main channel is always loaded first.
   }
 
+  // Getters and Setters for Signals
 
   setUser(data: Member) {
     this.user.set(data);
@@ -185,12 +172,12 @@ export class DataService {
   }
 
 
-  setCurrentChannel(data: Channel[]) {
+  setCurrentChannel(data: Channel) {
     this.currentChannel.set(data);
   }
 
 
-  getCurrentChannel(): Signal<Channel[]> {
+  getCurrentChannel(): Signal<Channel> {
     return this.currentChannel;
   }
 
@@ -225,13 +212,56 @@ export class DataService {
   }
 
 
-  setMessages(id: number) {
-    let filteredMessages = this.dummyMessages.filter(message => message.channel === id);
-    this.allMessages.set(filteredMessages);
+  setMessages(data: Message[]) {
+    this.allMessages.set(data);
   }
 
 
   getMessages(): Signal<Message[]> {
     return this.allMessages;
   }
+
+
+  // API calls to Firestore
+
+  /**
+   * Simulated API call to fetch the current logged-in user.
+   */
+  fetchUser() {
+    this.setUser(this.dummyUser);
+  }
+
+
+  /**
+   * Simulated API call to fetch all Channels for the current logged-in user.
+   */
+  fetchChannels() {
+    let filteredChannels = this.dummyAllChannels.filter(channel => channel.members.some(member => member.id === this.dummyUser.id));
+    this.setAllChannels(filteredChannels);
+  }
+
+
+  fetchCurrentChannel(id: number) {
+    let currentChannel = this.dummyAllChannels.find(channel => channel.id === id);
+    this.setCurrentChannel(currentChannel || this.dummyCurrentChannel);
+  }
+
+
+  /**
+   * Simulated API call to fetch all Direct Message Channels for the current logged-in user.
+   */
+  fetchDirectMessages() {
+    let filteredDMs = this.dummyAllDMs.filter(dm => dm.members.some(member => member.id === this.dummyUser.id));
+    this.setAllDirectMessages(filteredDMs);
+  }
+
+
+  /**
+   * Simulated API call to fetch all Messages of a particular Channel or Direct Message Channel.
+   */
+  fetchMessages(id: number) {
+    let filteredMessages = this.dummyMessages.filter(message => message.channel === id);
+    this.setMessages(filteredMessages); // For demo the messages main channel is always loaded first.
+  }
+
 }

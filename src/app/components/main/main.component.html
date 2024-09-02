@@ -57,16 +57,16 @@
 
     </div>
 
-    <div class="content-container hide-overflow" #content *ngFor="let chat of channel()">
+    <div class="content-container hide-overflow" #content>
         <div class="content-top-area">
-            <span class="channel-title">{{chat.name}}</span>
-            <span>Created on {{chat.created | date: "short"}} by {{chat.createdBy.fullName}}.</span>
-            <span class="description">Description: {{chat.description}}</span>
+            <span class="channel-title">{{channel().name}}</span>
+            <span>Created on {{channel().created | date: "short"}} by {{channel().createdBy.fullName}}.</span>
+            <span class="description">Description: {{channel().description}}</span>
             <span class="members-area">
                 <span class="members-list">
                     <span>Members:</span>
                     <button mat-button
-                        *ngFor="let member of chat.members"><mat-icon>person</mat-icon>{{member.fullName}}</button>
+                        *ngFor="let member of channel().members"><mat-icon>person</mat-icon>{{member.fullName}}</button>
                 </span>
                 <span class="more-btn">
                     <span>Members:</span>
@@ -74,7 +74,7 @@
                         <mat-icon>more_horiz</mat-icon>
                         <mat-menu #menu="matMenu">
                             <button mat-menu-item
-                                *ngFor="let member of chat.members"><mat-icon>person</mat-icon>{{member.fullName}}</button>
+                                *ngFor="let member of channel().members"><mat-icon>person</mat-icon>{{member.fullName}}</button>
                         </mat-menu>
                     </button>
                 </span>
