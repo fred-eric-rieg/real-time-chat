@@ -3,7 +3,7 @@ import { Component, ElementRef, Renderer2, Signal, ViewChild } from '@angular/co
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { Chat, DataService } from '../../shared/services/data.service';
+import { Channel, DataService } from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-main',
@@ -19,7 +19,11 @@ export class MainComponent {
 
   isShrunk = false;
 
-  chat!: Signal<Chat[]>;
+  channel!: Signal<Channel[]>;
+
+  channels!: Signal<Channel[]>;
+
+  showChannels = false;
 
   constructor(private renderer: Renderer2, public dataService: DataService) {
 
@@ -27,7 +31,8 @@ export class MainComponent {
 
 
   ngOnInit(): void {
-    this.chat = this.dataService.getCurrentChannel();
+    this.channel = this.dataService.getCurrentChannel();
+    this.channels = this.dataService.getAllChannels();
   }
 
 
@@ -43,6 +48,11 @@ export class MainComponent {
       this.renderer.addClass(leftMenuEl, 'shrink');
       this.isShrunk = true;
     }
+  }
+
+
+  switchToChannel(channel: Channel) {
+    this.dataService.setCurrentChannel([channel]);
   }
   
 }

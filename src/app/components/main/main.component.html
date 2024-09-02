@@ -11,7 +11,15 @@
 
         <div class="left-menu-bottom" *ngIf="!isShrunk">
             <button mat-button>Threads <mat-icon>chevron_right</mat-icon></button>
-            <button mat-button>Channels <mat-icon>chevron_right</mat-icon></button>
+            <button mat-button (click)="showChannels = !showChannels">
+                Channels
+                <mat-icon *ngIf="!showChannels">chevron_right</mat-icon>
+                <mat-icon *ngIf="showChannels">chevron_left</mat-icon>
+            </button>
+            <ng-container *ngIf="showChannels">
+                <button mat-button *ngFor="let channel of channels()" (click)="switchToChannel(channel)">{{channel.name}}</button>
+                    
+            </ng-container>
             <button mat-button>Direct Messages <mat-icon>chevron_right</mat-icon></button>
             <span>...</span>
             <span>Current Channel</span>
@@ -21,7 +29,7 @@
 
     </div>
 
-    <div class="content-container hide-overflow" #content *ngFor="let chat of chat()">
+    <div class="content-container hide-overflow" #content *ngFor="let chat of channel()">
         <div class="content-top-area">
             <span class="channel-title">{{chat.name}}</span>
             <span>Created on {{chat.created | date: "short"}} by {{chat.createdBy.fullName}}.</span>
