@@ -7,11 +7,20 @@ export interface Member {
 }
 
 export interface Channel {
+  id: number,
   created: Date,
   name: string,
   description: string,
   createdBy: Member,
   members: Member[]
+}
+
+export interface Message {
+  id: number,
+  created: Date,
+  createdBy: Member,
+  content: string,
+  channel: number
 }
 
 @Injectable({
@@ -23,11 +32,24 @@ export class DataService {
     {
       fullName: "Hans Dieter",
       id: 1,
-    }
+  }
+
+
+  dummyMessages:  Message[] = [
+    {
+      id: 1,
+      created: new Date(),
+      createdBy: { id: 1, fullName: "Dieter Müller" },
+      content: "First Message of the Day.",
+      channel: 1
+    },
+    
+  ]
 
 
   dummyCurrentChannel: Channel[] = [
     {
+      id: 1,
       created: new Date(),
       name: "Main Channel",
       description: "Another channel about general stuff.",
@@ -46,6 +68,7 @@ export class DataService {
 
   dummyAllChannels: Channel[] = [
     {
+      id: 1,
       created: new Date(),
       name: "Main Channel",
       description: "Another channel about general stuff.",
@@ -60,6 +83,7 @@ export class DataService {
       ]
     },
     {
+      id: 2,
       created: new Date(),
       name: "Second Channel",
       description: "Another channel about specific stuff.",
@@ -71,6 +95,7 @@ export class DataService {
       ]
     },
     {
+      id: 3,
       created: new Date(),
       name: "Third Channel",
       description: "Another channel about nieche stuff.",
@@ -84,22 +109,9 @@ export class DataService {
   ]
 
 
-  dummyCurrentDM: Channel[] = [
-    {
-      created: new Date(),
-      name: "Direct Message",
-      description: "Just between you and a friend.",
-      createdBy: { fullName: "Thomas Müller", id: 2 },
-      members: [
-        { fullName: "Thomas Müller", id: 2 },
-        { fullName: "Ingrid Kaiser", id: 6 },
-      ]
-    }
-  ]
-
-
   dummyAllDMs: Channel[] = [
     {
+      id: 4,
       created: new Date(),
       name: "Direct Message",
       description: "Just between you and a friend.",
@@ -110,6 +122,7 @@ export class DataService {
       ]
     },
     {
+      id: 5,
       created: new Date(),
       name: "Direct Message",
       description: "Just between you and a friend.",
@@ -120,6 +133,7 @@ export class DataService {
       ]
     },
     {
+      id: 6,
       created: new Date(),
       name: "Direct Message",
       description: "Just between you and a friend.",
@@ -140,6 +154,8 @@ export class DataService {
   private allDirectMessages = signal<Channel[]>([]);
 
   private currentDirectMessage = signal<Channel[]>([]);
+
+  private allMessages = signal<Message[]>([]);
 
 
   constructor() {
