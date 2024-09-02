@@ -22,7 +22,15 @@
                     
             </ng-container>
 
-            <button mat-button>Direct Messages <mat-icon>chevron_right</mat-icon></button>
+            <button mat-button (click)="showDMs = !showDMs">
+                Direct Messages
+                <mat-icon *ngIf="!showDMs">chevron_right</mat-icon>
+                <mat-icon *ngIf="showDMs">chevron_left</mat-icon>
+            </button>
+            <ng-container *ngIf="showDMs">
+                <button mat-button *ngFor="let dm of directMessages()" (click)="switchToChannel(dm)">{{dm.members[1].fullName}}</button>
+                    
+            </ng-container>
         </div>
 
 

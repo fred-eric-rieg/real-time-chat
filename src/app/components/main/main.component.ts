@@ -20,10 +20,13 @@ export class MainComponent {
   isShrunk = false;
 
   channel!: Signal<Channel[]>;
-
   channels!: Signal<Channel[]>;
 
+  directMessage!: Signal<Channel[]>;
+  directMessages!: Signal<Channel[]>;
+
   showChannels = false;
+  showDMs = false;
 
   constructor(private renderer: Renderer2, public dataService: DataService) {
 
@@ -33,6 +36,7 @@ export class MainComponent {
   ngOnInit(): void {
     this.channel = this.dataService.getCurrentChannel();
     this.channels = this.dataService.getAllChannels();
+    this.directMessages = this.dataService.getAllDirectMessages();
   }
 
 
