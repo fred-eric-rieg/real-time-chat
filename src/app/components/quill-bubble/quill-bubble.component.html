@@ -1,3 +1,5 @@
 <quill-editor class="size" (onFocus)="focus($event)" (onEditorChanged)="changedEditor($event)" (onBlur)="blur($event)"
     (onEditorCreated)="created($event)">
 </quill-editor>
+
+<button mat-icon-button class="send" (click)="sanitizeMessage()" [disabled]="isEmpty"><mat-icon>send</mat-icon></button>

@@ -295,7 +295,18 @@ export class DataService {
 
 
   sendMessage(message: string) {
-    console.log("sending...:", message);
+    let old = this.getMessages();
+    let currentChannel = this.getCurrentChannel()
+    let combined = old().concat(
+      [{
+        id: old().length + 1,
+        created: new Date(),
+        createdBy: this.dummyUser,
+        content: message,
+        channel: currentChannel().id
+      },]
+    ); 
+    this.setMessages(combined);
   }
 
 }

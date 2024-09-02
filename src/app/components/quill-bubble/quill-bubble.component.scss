@@ -4,6 +4,12 @@
     white-space: wrap;
 }
 
+.send {
+    position: absolute;
+    right: 8px;
+    top: 2px;
+}
+
 @media screen and (max-width: 1440px) {
     .size {
         height: 100px;
