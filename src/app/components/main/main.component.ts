@@ -5,11 +5,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Channel, DataService, Member, Message } from '../../shared/services/data.service';
 import { MatCardModule } from '@angular/material/card';
+import { QuillBubbleComponent } from "../quill-bubble/quill-bubble.component";
+
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, CommonModule, MatMenuModule, MatCardModule],
+  imports: [MatButtonModule, MatIconModule, CommonModule, MatMenuModule, MatCardModule, QuillBubbleComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
