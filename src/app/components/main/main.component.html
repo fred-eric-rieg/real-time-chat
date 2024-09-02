@@ -84,13 +84,13 @@
         <div class="content-bottom-area">
 
             <div class="message" *ngFor="let message of messages()">
-                <mat-card >
+                <mat-card>
                     <mat-card-content style="display: flex; flex-direction: column;">
                         <span style="font-weight: bold;">{{message.createdBy.fullName}}: </span>
                         {{message.created | date: "shortTime"}}
                     </mat-card-content>
                 </mat-card>
-                <mat-card appearance="outlined">
+                <mat-card>
                     <mat-card-content>
                         <span>{{message.content}}</span>
                     </mat-card-content>
