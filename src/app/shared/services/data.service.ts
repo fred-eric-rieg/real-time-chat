@@ -170,6 +170,8 @@ export class DataService {
     let filteredDMs = this.dummyAllDMs.filter(dm => dm.members.some(member => member.id === this.dummyUser.id));
 
     this.setAllDirectMessages(filteredDMs);
+
+    this.setMessages(1); // For demo the messages main channel is always loaded first.
   }
 
 
@@ -220,5 +222,16 @@ export class DataService {
 
   getCurrentDirectMessage(): Signal<Channel[]> {
     return this.currentDirectMessage;
+  }
+
+
+  setMessages(id: number) {
+    let filteredMessages = this.dummyMessages.filter(message => message.channel === id);
+    this.allMessages.set(filteredMessages);
+  }
+
+
+  getMessages(): Signal<Message[]> {
+    return this.allMessages;
   }
 }

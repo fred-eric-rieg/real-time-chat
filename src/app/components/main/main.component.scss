@@ -20,6 +20,17 @@
     padding: 8px;
 }
 
+.content-bottom-area {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.message {
+    display: flex;
+    gap: 8px;
+}
+
 .hide-overflow {
     flex-grow: 1;
     flex-shrink: 1;

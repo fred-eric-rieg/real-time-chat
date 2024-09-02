@@ -3,12 +3,13 @@ import { Component, ElementRef, OnInit, Renderer2, Signal, ViewChild } from '@an
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { Channel, DataService, Member } from '../../shared/services/data.service';
+import { Channel, DataService, Member, Message } from '../../shared/services/data.service';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, CommonModule, MatMenuModule],
+  imports: [MatButtonModule, MatIconModule, CommonModule, MatMenuModule, MatCardModule],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
@@ -25,6 +26,8 @@ export class MainComponent implements OnInit {
   directMessage!: Signal<Channel[]>;
   directMessages!: Signal<Channel[]>;
 
+  messages!: Signal<Message[]>;
+
   showChannels = false;
   showDMs = false;
 
@@ -40,6 +43,7 @@ export class MainComponent implements OnInit {
     this.channel = this.dataService.getCurrentChannel();
     this.channels = this.dataService.getAllChannels();
     this.directMessages = this.dataService.getAllDirectMessages();
+    this.messages = this.dataService.getMessages();
   }
 
 
@@ -60,6 +64,8 @@ export class MainComponent implements OnInit {
 
   switchToChannel(channel: Channel) {
     this.dataService.setCurrentChannel([channel]);
+    this.dataService.setMessages(channel.id);
+    this.dataService.getMessages();
   }
 
 

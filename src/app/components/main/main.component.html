@@ -14,7 +14,8 @@
                 <mat-icon>forum</mat-icon>
                 <mat-menu #chans="matMenu">
                     <p style="margin-left: 8px;">Channels</p>
-                    <button mat-menu-item *ngFor="let channel of channels()" (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon>{{channel.name}}</button>
+                    <button mat-menu-item *ngFor="let channel of channels()"
+                        (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon>{{channel.name}}</button>
                 </mat-menu>
             </button>
 
@@ -22,7 +23,8 @@
                 <mat-icon>3p</mat-icon>
                 <mat-menu #dms="matMenu">
                     <p style="margin-left: 8px;">Direct Messages</p>
-                    <button mat-menu-item *ngFor="let dm of directMessages()" (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon>{{returnChatpartner(dm.members)}}</button>
+                    <button mat-menu-item *ngFor="let dm of directMessages()"
+                        (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon>{{returnChatpartner(dm.members)}}</button>
                 </mat-menu>
             </button>
         </div>
@@ -35,8 +37,9 @@
                 <mat-icon *ngIf="showChannels">chevron_left</mat-icon>
             </button>
             <ng-container *ngIf="showChannels">
-                <button mat-button *ngFor="let channel of channels()" (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon> {{channel.name}}</button>
-                    
+                <button mat-button *ngFor="let channel of channels()"
+                    (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon> {{channel.name}}</button>
+
             </ng-container>
 
             <button mat-button (click)="showDMs = !showDMs">
@@ -45,8 +48,9 @@
                 <mat-icon *ngIf="showDMs">chevron_left</mat-icon>
             </button>
             <ng-container *ngIf="showDMs">
-                <button mat-button *ngFor="let dm of directMessages()" (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon> {{returnChatpartner(dm.members)}}</button>
-                    
+                <button mat-button *ngFor="let dm of directMessages()"
+                    (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon> {{returnChatpartner(dm.members)}}</button>
+
             </ng-container>
         </div>
 
@@ -61,18 +65,39 @@
             <span class="members-area">
                 <span class="members-list">
                     <span>Members:</span>
-                    <button mat-button *ngFor="let member of chat.members"><mat-icon>person</mat-icon>{{member.fullName}}</button>
+                    <button mat-button
+                        *ngFor="let member of chat.members"><mat-icon>person</mat-icon>{{member.fullName}}</button>
                 </span>
                 <span class="more-btn">
                     <span>Members:</span>
                     <button mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-icon>more_horiz</mat-icon>
                         <mat-menu #menu="matMenu">
-                            <button mat-menu-item *ngFor="let member of chat.members"><mat-icon>person</mat-icon>{{member.fullName}}</button>
+                            <button mat-menu-item
+                                *ngFor="let member of chat.members"><mat-icon>person</mat-icon>{{member.fullName}}</button>
                         </mat-menu>
                     </button>
                 </span>
             </span>
+        </div>
+
+        <div class="content-bottom-area">
+
+            <div class="message" *ngFor="let message of messages()">
+                <mat-card >
+                    <mat-card-content style="display: flex; flex-direction: column;">
+                        <span style="font-weight: bold;">{{message.createdBy.fullName}}: </span>
+                        {{message.created | date: "shortTime"}}
+                    </mat-card-content>
+                </mat-card>
+                <mat-card appearance="outlined">
+                    <mat-card-content>
+                        <span>{{message.content}}</span>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            
+
         </div>
     </div>
 
