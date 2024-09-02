@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2, Signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, SecurityContext, Signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Channel, DataService, Member, Message } from '../../shared/services/data.service';
 import { MatCardModule } from '@angular/material/card';
 import { QuillBubbleComponent } from "../quill-bubble/quill-bubble.component";
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class MainComponent implements OnInit {
 
   user!: Signal<Member>;
 
-  constructor(private renderer: Renderer2, public dataService: DataService) {
+  constructor(private renderer: Renderer2, public dataService: DataService, private sanitizer: DomSanitizer) {
 
   };
 
@@ -77,6 +78,11 @@ export class MainComponent implements OnInit {
   returnChatpartner(members: Member[]) {
     const currentUser = this.user();
     return members.find(members => members.id === currentUser.id)?.fullName || "Unknown";
+  }
+
+
+  getSanitizedMessage(message: string) {
+    return this.sanitizer.sanitize(SecurityContext.HTML, message);
   }
   
 }

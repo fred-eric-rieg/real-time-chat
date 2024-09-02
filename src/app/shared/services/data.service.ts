@@ -66,8 +66,13 @@ export class DataService {
       content: "I am writing a very long text in order to see the impact on the UI when writing that much. In fact, there is even more. Let me elaborate.",
       channel: 1
     },
-
-
+    {
+      id: 5,
+      created: new Date(),
+      createdBy: { id: 1, fullName: "Dieter Müller", image: "profile8.jpg" },
+      content: `<b onmouseover=alert('Wufff!')>click me!</b><script>console.log("xss attack");</script>`,
+      channel: 1
+    },
   ]
 
 

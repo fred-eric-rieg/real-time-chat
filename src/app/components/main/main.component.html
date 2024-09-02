@@ -88,7 +88,7 @@
                 <mat-card>
                     <mat-card-content style="display: flex; flex-direction: column;">
                         <span style="font-size: 12px; line-height: 0.5; margin-bottom: 8px;">{{message.createdBy.fullName}} - {{message.created | date: "short"}}</span>
-                        <span>{{message.content}}</span>
+                        <span [innerHTML]="getSanitizedMessage(message.content)"></span>
                     </mat-card-content>
                 </mat-card>
             </div>
