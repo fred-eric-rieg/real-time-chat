@@ -84,21 +84,18 @@
         <div class="content-bottom-area">
 
             <div class="message" *ngFor="let message of messages()">
+                <img style="width: 40px; border-radius: 16px; object-fit: contain;" [src]="message.createdBy.image" alt="profile picture">
                 <mat-card>
                     <mat-card-content style="display: flex; flex-direction: column;">
-                        <span style="font-weight: bold;">{{message.createdBy.fullName}}: </span>
-                        {{message.created | date: "shortTime"}}
-                    </mat-card-content>
-                </mat-card>
-                <mat-card>
-                    <mat-card-content>
+                        <span style="font-size: 12px; line-height: 0.5; margin-bottom: 8px;">{{message.createdBy.fullName}} - {{message.created | date: "short"}}</span>
                         <span>{{message.content}}</span>
                     </mat-card-content>
                 </mat-card>
             </div>
-            
+
 
         </div>
-    </div>
 
-</div>
+        <app-quill-bubble></app-quill-bubble>
+
+    </div>

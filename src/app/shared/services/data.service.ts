@@ -3,7 +3,8 @@ import { Injectable, Signal, signal } from '@angular/core';
 
 export interface Member {
   fullName: string,
-  id: number
+  id: number,
+  image: string
 }
 
 export interface Channel {
@@ -32,6 +33,7 @@ export class DataService {
     {
       fullName: "Hans Dieter",
       id: 1,
+      image: "profile8.jpg"
     }
 
 
@@ -39,10 +41,32 @@ export class DataService {
     {
       id: 1,
       created: new Date(),
-      createdBy: { id: 1, fullName: "Dieter Müller" },
+      createdBy: { id: 1, fullName: "Dieter Müller", image: "/profile8.jpg" },
       content: "First Message of the Day.",
       channel: 1
     },
+    {
+      id: 2,
+      created: new Date(),
+      createdBy: { id: 1, fullName: "Dieter Müller", image: "profile8.jpg" },
+      content: "Second Message of the Day.",
+      channel: 1
+    },
+    {
+      id: 3,
+      created: new Date(),
+      createdBy: { id: 1, fullName: "Dieter Müller", image: "profile8.jpg" },
+      content: "Third Message of the Day.",
+      channel: 1
+    },
+    {
+      id: 4,
+      created: new Date(),
+      createdBy: { id: 1, fullName: "Dieter Müller", image: "profile8.jpg" },
+      content: "I am writing a very long text in order to see the impact on the UI when writing that much. In fact, there is even more. Let me elaborate.",
+      channel: 1
+    },
+
 
   ]
 
@@ -53,14 +77,14 @@ export class DataService {
       created: new Date(),
       name: "Main Channel",
       description: "Another channel about general stuff.",
-      createdBy: { fullName: "Thomas Müller", id: 2 },
+      createdBy: { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
       members: [
-        { fullName: "Hans Dieter", id: 1 },
-        { fullName: "Thomas Müller", id: 2 },
-        { fullName: "Klausi Mayer", id: 3 },
-        { fullName: "Marie Löffel", id: 4 },
-        { fullName: "Renate Bäcker", id: 5 },
-        { fullName: "Ingrid Kaiser", id: 6 },
+        { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
+        { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
+        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
+        { fullName: "Marie Löffel", id: 4, image: "profile8.jpg" },
+        { fullName: "Renate Bäcker", id: 5, image: "profile8.jpg" },
+        { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
       ]
     }
 
@@ -71,14 +95,14 @@ export class DataService {
       created: new Date(),
       name: "Main Channel",
       description: "Another channel about general stuff.",
-      createdBy: { fullName: "Thomas Müller", id: 2 },
+      createdBy: { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
       members: [
-        { fullName: "Hans Dieter", id: 1 },
-        { fullName: "Thomas Müller", id: 2 },
-        { fullName: "Klausi Mayer", id: 3 },
-        { fullName: "Marie Löffel", id: 4 },
-        { fullName: "Renate Bäcker", id: 5 },
-        { fullName: "Ingrid Kaiser", id: 6 },
+        { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
+        { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
+        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
+        { fullName: "Marie Löffel", id: 4, image: "profile8.jpg" },
+        { fullName: "Renate Bäcker", id: 5, image: "profile8.jpg" },
+        { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
       ]
     },
     {
@@ -86,11 +110,11 @@ export class DataService {
       created: new Date(),
       name: "Second Channel",
       description: "Another channel about specific stuff.",
-      createdBy: { fullName: "Klausi Mayer", id: 3 },
+      createdBy: { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
       members: [
-        { fullName: "Hans Dieter", id: 1 },
-        { fullName: "Thomas Müller", id: 2 },
-        { fullName: "Klausi Mayer", id: 3 },
+        { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
+        { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
+        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
       ]
     },
     {
@@ -98,11 +122,11 @@ export class DataService {
       created: new Date(),
       name: "Third Channel",
       description: "Another channel about nieche stuff.",
-      createdBy: { fullName: "Ingrid Kaiser", id: 6 },
+      createdBy: { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
       members: [
-        { fullName: "Hans Dieter", id: 1 },
-        { fullName: "Klausi Mayer", id: 3 },
-        { fullName: "Ingrid Kaiser", id: 6 },
+        { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
+        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
+        { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
       ]
     }
   ]
@@ -114,10 +138,10 @@ export class DataService {
       created: new Date(),
       name: "Direct Message",
       description: "Just between you and a friend.",
-      createdBy: { fullName: "Thomas Müller", id: 2 },
+      createdBy: { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
       members: [
-        { fullName: "Thomas Müller", id: 2 },
-        { fullName: "Klausi Mayer", id: 3 },
+        { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
+        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
       ]
     },
     {
@@ -125,10 +149,10 @@ export class DataService {
       created: new Date(),
       name: "Direct Message",
       description: "Just between you and a friend.",
-      createdBy: { fullName: "Klausi Mayer", id: 3 },
+      createdBy: { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
       members: [
-        { fullName: "Klausi Mayer", id: 3 },
-        { fullName: "Hans Dieter", id: 1 },
+        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
+        { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
       ]
     },
     {
@@ -136,15 +160,15 @@ export class DataService {
       created: new Date(),
       name: "Direct Message",
       description: "Just between you and a friend.",
-      createdBy: { fullName: "Ingrid Kaiser", id: 6 },
+      createdBy: { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
       members: [
-        { fullName: "Ingrid Kaiser", id: 6 },
-        { fullName: "Renate Bäcker", id: 5 },
+        { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
+        { fullName: "Renate Bäcker", id: 5, image: "profile8.jpg" },
       ]
     }
   ]
 
-  private user = signal<Member>({ id: 0, fullName: "Administrator" });
+  private user = signal<Member>({ id: 0, fullName: "Administrator", image: "profile8.jpg" });
 
   private currentChannel = signal<Channel>(this.dummyCurrentChannel);
 
