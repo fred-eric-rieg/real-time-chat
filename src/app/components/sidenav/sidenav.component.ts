@@ -48,6 +48,7 @@ export class SidenavComponent implements AfterViewInit, OnInit {
 
   switchToChannel(channel: Channel) {
     this.dataService.setCurrentChannel(channel);
+    this.dataService.fetchMessages(channel.id);
     this.drawer.toggle();
   }
 
