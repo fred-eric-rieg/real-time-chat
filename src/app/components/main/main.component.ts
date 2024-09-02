@@ -27,7 +27,7 @@ export class MainComponent {
 
 
   ngOnInit(): void {
-    this.chat = this.dataService.getChats();
+    this.chat = this.dataService.getCurrentChannel();
   }
 
 

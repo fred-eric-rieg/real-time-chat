@@ -43,17 +43,17 @@ export class DataService {
 
   constructor() {
     // For testing, this single chat is inserted into the signal.
-    this.setChats([this.data]);
+    this.setCurrentChannel([this.data]);
   }
 
 
   // Method to set the Chat instances
-  setChats(data: Chat[]) {
+  setCurrentChannel(data: Chat[]) {
     this.currentChannel.set(data);
   }
 
   // Method to get the current Chat instances
-  getChats(): Signal<Chat[]> {
+  getCurrentChannel(): Signal<Chat[]> {
     return this.currentChannel;
   }
 }
