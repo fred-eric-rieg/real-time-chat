@@ -13,18 +13,23 @@ import { MatIconModule } from '@angular/material/icon';
 export class MainComponent {
 
   @ViewChild('leftmenu') leftmenu!: ElementRef;
+  @ViewChild('content') content!: ElementRef;
+
   isShrunk = false;
 
   constructor(private renderer: Renderer2) {};
 
 
   toggleLeftMenu() {
-    const element = this.leftmenu.nativeElement;
-    if (element.classList.contains('shrink')) {
-      this.renderer.removeClass(element, 'shrink');
+    const leftMenuEl = this.leftmenu.nativeElement;
+    const contentEl = this.content.nativeElement;
+    if (leftMenuEl.classList.contains('shrink')) {
+      this.renderer.addClass(contentEl, 'hide-overflow');
+      this.renderer.removeClass(leftMenuEl, 'shrink');
       this.isShrunk = false;
     } else {
-      this.renderer.addClass(element, 'shrink');
+      this.renderer.removeClass(contentEl, 'hide-overflow');
+      this.renderer.addClass(leftMenuEl, 'shrink');
       this.isShrunk = true;
     }
   }
