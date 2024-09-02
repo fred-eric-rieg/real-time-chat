@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, Signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { Chat, DataService } from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +19,16 @@ export class MainComponent {
 
   isShrunk = false;
 
-  constructor(private renderer: Renderer2) {};
+  chat!: Signal<Chat[]>;
+
+  constructor(private renderer: Renderer2, public dataService: DataService) {
+
+  };
+
+
+  ngOnInit(): void {
+    this.chat = this.dataService.getChats();
+  }
 
 
   toggleLeftMenu() {
