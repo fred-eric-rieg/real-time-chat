@@ -1,0 +1,17 @@
+.size {
+    height: 200px;
+    width: 100%;
+    white-space: wrap;
+}
+
+@media screen and (max-width: 1440px) {
+    .size {
+        height: 100px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .size {
+        height: 80px;
+    }
+}
