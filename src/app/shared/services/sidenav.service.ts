@@ -11,8 +11,8 @@ export class SidenavService {
 
   constructor() { }
 
-   // Method to set the MatDrawer instance
-   setDrawer(drawer: MatDrawer | null) {
+  // Method to set the MatDrawer instance
+  setDrawer(drawer: MatDrawer | null) {
     this.drawerSignal.set(drawer);
   }
 

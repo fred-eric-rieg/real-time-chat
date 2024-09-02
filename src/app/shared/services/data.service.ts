@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal, signal } from '@angular/core';
 
 export interface Member {
   fullName: string,
@@ -39,5 +39,18 @@ export class DataService {
     ]
   }
 
+  private dataSignal = signal<Chat[] | null>(null);
+
   constructor() { }
+
+
+  // Method to set the Chat instances
+  setDrawer(data: Chat[] | null) {
+    this.dataSignal.set(data);
+  }
+
+  // Method to get the current Chat instances
+  getDrawer(): Signal<Chat[] | null> {
+    return this.dataSignal;
+  }
 }
