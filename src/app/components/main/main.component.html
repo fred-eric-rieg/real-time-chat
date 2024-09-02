@@ -2,15 +2,30 @@
 
     <div class="left-menu-area" #leftmenu>
 
-        <div class="left-menu-top" (click)="toggleLeftMenu()">
-            <button mat-icon-button>
+        <div class="left-menu-top">
+            <button mat-icon-button (click)="toggleLeftMenu()">
                 <mat-icon *ngIf="!isShrunk">chevron_left</mat-icon>
                 <mat-icon *ngIf="isShrunk">chevron_right</mat-icon>
             </button>
         </div>
 
+        <div class="left-menu-bottom" *ngIf="isShrunk">
+            <button mat-icon-button [matMenuTriggerFor]="chans">
+                <mat-icon>forum</mat-icon>
+                <mat-menu #chans="matMenu">
+                    <button mat-menu-item *ngFor="let channel of channels()" (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon>{{channel.name}}</button>
+                </mat-menu>
+            </button>
+
+            <button mat-icon-button [matMenuTriggerFor]="dms">
+                <mat-icon>3p</mat-icon>
+                <mat-menu #dms="matMenu">
+                    <button mat-menu-item *ngFor="let dm of directMessages()" (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon>{{returnChatpartner(dm.members)}}</button>
+                </mat-menu>
+            </button>
+        </div>
+
         <div class="left-menu-bottom" *ngIf="!isShrunk">
-            <button mat-button>Threads <mat-icon>chevron_right</mat-icon></button>
 
             <button mat-button (click)="showChannels = !showChannels">
                 Channels
