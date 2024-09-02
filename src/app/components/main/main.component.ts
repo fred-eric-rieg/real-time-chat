@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Renderer2, Signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, signal, Signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { Channel, DataService } from '../../shared/services/data.service';
+import { Channel, DataService, Member } from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-main',
@@ -28,12 +28,15 @@ export class MainComponent {
   showChannels = false;
   showDMs = false;
 
+  user!: Signal<Member>;
+
   constructor(private renderer: Renderer2, public dataService: DataService) {
 
   };
 
 
   ngOnInit(): void {
+    this.user = this.dataService.getUser();
     this.channel = this.dataService.getCurrentChannel();
     this.channels = this.dataService.getAllChannels();
     this.directMessages = this.dataService.getAllDirectMessages();
@@ -57,6 +60,12 @@ export class MainComponent {
 
   switchToChannel(channel: Channel) {
     this.dataService.setCurrentChannel([channel]);
+  }
+
+
+  returnChatpartner(dm: Member[]) {
+    const currentUser = this.user();
+    return dm.find(members => members.id === currentUser.id)?.fullName || "Unknown";
   }
   
 }

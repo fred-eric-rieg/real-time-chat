@@ -1,5 +1,6 @@
 import { Injectable, Signal, signal } from '@angular/core';
 
+
 export interface Member {
   fullName: string,
   id: number
@@ -17,6 +18,13 @@ export interface Channel {
   providedIn: 'root'
 })
 export class DataService {
+
+  dummyUser: Member =
+    {
+      fullName: "Hans Dieter",
+      id: 1,
+    }
+
 
   dummyCurrentChannel: Channel[] = [
     {
@@ -123,6 +131,7 @@ export class DataService {
     }
   ]
 
+  private user = signal<Member>({ id: 0, fullName: "Administrator" });
 
   private currentChannel = signal<Channel[]>([]);
 
@@ -135,10 +144,26 @@ export class DataService {
 
   constructor() {
     // Testdaten
+    this.setUser(this.dummyUser);
     this.setCurrentChannel(this.dummyCurrentChannel);
-    this.setAllChannels(this.dummyAllChannels);
-    this.setAllDirectMessages(this.dummyAllDMs);
-    this.setCurrentDirectMessage(this.dummyCurrentDM);
+
+    let filteredChannels = this.dummyAllChannels.filter(channel => channel.members.some(member => member.id === this.dummyUser.id));
+
+    this.setAllChannels(filteredChannels);
+
+    let filteredDMs = this.dummyAllDMs.filter(dm => dm.members.some(member => member.id === this.dummyUser.id));
+
+    this.setAllDirectMessages(filteredDMs);
+  }
+
+
+  setUser(data: Member) {
+    this.user.set(data);
+  }
+
+
+  getUser() {
+    return this.user;
   }
 
 
