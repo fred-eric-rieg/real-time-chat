@@ -1,9 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import 'quill/dist/quill.bubble.css';
+@import 'quill/dist/quill.snow.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 
 .mat-drawer-container {
@@ -12,6 +19,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-mdc-card {
     background-color: var(--text) !important;
+}
+
+quill-editor {
+    display: block;
+    z-index: 3;
+}
+
+.ql-editor:focus {
+    border: 1px solid #80bdff !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
 }
 
 

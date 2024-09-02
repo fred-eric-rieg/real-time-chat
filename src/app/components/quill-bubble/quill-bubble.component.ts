@@ -1,38 +1,54 @@
-import { Component } from '@angular/core';
-import { QuillModule } from 'ngx-quill';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { EditorChangeContent, EditorChangeSelection, QuillEditorComponent } from 'ngx-quill';
+import Quill from 'quill'
+import Block from 'quill/blots/block';
 
-
-const modules = {
-  toolbar: [
-    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-    ['blockquote', 'code-block'],
-
-    [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-    [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-    [{ 'direction': 'rtl' }],                         // text direction
-
-    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-    [{ 'font': [] }],
-    [{ 'align': [] }],
-
-    ['clean'],                                         // remove formatting button
-
-    ['link', 'image', 'video']                         // link and image, video
-  ]
-};
+Block.tagName = "DIV";
+Quill.register(Block, true);
 
 @Component({
   selector: 'app-quill-bubble',
   standalone: true,
-  imports: [QuillModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [QuillEditorComponent],
   templateUrl: './quill-bubble.component.html',
   styleUrl: './quill-bubble.component.scss'
 })
 export class QuillBubbleComponent {
+
+  blurred = false
+  focused = false
+
+  created(event: Quill | any) {
+    // tslint:disable-next-line:no-console
+    console.log('editor-created', event)
+  }
+
+  changedEditor(event: EditorChangeContent | EditorChangeSelection | any) {
+    // tslint:disable-next-line:no-console
+    console.log('editor-change', event)
+  }
+
+  focus($event: any) {
+    // tslint:disable-next-line:no-console
+    console.log('focus', $event)
+    this.focused = true
+    this.blurred = false
+  }
+  nativeFocus($event: any) {
+    // tslint:disable-next-line:no-console
+    console.log('native-focus', $event)
+  }
+
+  blur($event: any) {
+    // tslint:disable-next-line:no-console
+    console.log('blur', $event)
+    this.focused = false
+    this.blurred = true
+  }
+  nativeBlur($event: any) {
+    // tslint:disable-next-line:no-console
+    console.log('native-blur', $event)
+  }
 
 }
