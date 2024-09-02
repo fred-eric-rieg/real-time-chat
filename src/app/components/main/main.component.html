@@ -11,6 +11,7 @@
 
         <div class="left-menu-bottom" *ngIf="!isShrunk">
             <button mat-button>Threads <mat-icon>chevron_right</mat-icon></button>
+
             <button mat-button (click)="showChannels = !showChannels">
                 Channels
                 <mat-icon *ngIf="!showChannels">chevron_right</mat-icon>
@@ -20,10 +21,8 @@
                 <button mat-button *ngFor="let channel of channels()" (click)="switchToChannel(channel)">{{channel.name}}</button>
                     
             </ng-container>
+
             <button mat-button>Direct Messages <mat-icon>chevron_right</mat-icon></button>
-            <span>...</span>
-            <span>Current Channel</span>
-            <span>Channel Members</span>
         </div>
 
 
