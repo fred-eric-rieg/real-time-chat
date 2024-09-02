@@ -38,8 +38,16 @@
                 </span>
                 <span class="more-btn">
                     <span>Members:</span>
-                    <button mat-icon-button>
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-icon>more_horiz</mat-icon>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item><mat-icon>person</mat-icon>Klausi Mayer</button>
+                            <button mat-menu-item><mat-icon>person</mat-icon>Peter Müller</button>
+                            <button mat-menu-item><mat-icon>person</mat-icon>Marie Löffel</button>
+                            <button mat-menu-item><mat-icon>person</mat-icon>Hans Dieter</button>
+                            <button mat-menu-item><mat-icon>person</mat-icon>Renate Bäcker</button>
+                            <button mat-menu-item><mat-icon>person</mat-icon>Ingrid Kaiser</button>
+                        </mat-menu>
                     </button>
                 </span>
             </span>
