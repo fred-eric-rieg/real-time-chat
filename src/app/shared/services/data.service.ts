@@ -293,4 +293,9 @@ export class DataService {
     this.setMessages(filteredMessages); // For demo the messages main channel is always loaded first.
   }
 
+
+  sendMessage(message: string) {
+    console.log("sending...:", message);
+  }
+
 }
