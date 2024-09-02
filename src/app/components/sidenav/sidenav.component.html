@@ -7,6 +7,31 @@
                 <mat-icon>close</mat-icon>
             </button>
         </div>
+
+        <div class="bottom-area">
+            <button mat-button (click)="showChannels = !showChannels">
+                Channels
+                <mat-icon *ngIf="!showChannels">chevron_right</mat-icon>
+                <mat-icon *ngIf="showChannels">chevron_left</mat-icon>
+            </button>
+            <ng-container *ngIf="showChannels">
+                <button mat-button *ngFor="let channel of channels()" (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon> {{channel.name}}</button>
+                    
+            </ng-container>
+    
+            <button mat-button (click)="showDMs = !showDMs">
+                Direct Messages
+                <mat-icon *ngIf="!showDMs">chevron_right</mat-icon>
+                <mat-icon *ngIf="showDMs">chevron_left</mat-icon>
+            </button>
+            <ng-container *ngIf="showDMs">
+                <button mat-button *ngFor="let dm of directMessages()" (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon> {{returnChatpartner(dm.members)}}</button>
+                    
+            </ng-container>
+        </div>
+
+        
+
     </mat-drawer>
 
 </mat-drawer-container>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Renderer2, Signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, Signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -12,7 +12,7 @@ import { Channel, DataService, Member } from '../../shared/services/data.service
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
 
   @ViewChild('leftmenu') leftmenu!: ElementRef;
   @ViewChild('content') content!: ElementRef;
@@ -63,9 +63,9 @@ export class MainComponent {
   }
 
 
-  returnChatpartner(dm: Member[]) {
+  returnChatpartner(members: Member[]) {
     const currentUser = this.user();
-    return dm.find(members => members.id === currentUser.id)?.fullName || "Unknown";
+    return members.find(members => members.id === currentUser.id)?.fullName || "Unknown";
   }
   
 }

@@ -18,3 +18,9 @@
 .top-area {
     height: 50px;
 }
+
+.bottom-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
