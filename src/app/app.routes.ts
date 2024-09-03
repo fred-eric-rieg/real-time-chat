@@ -6,10 +6,11 @@ import { AuthGuard } from './guard/auth.guard';
 import { ChannelComponent } from './components/dashboard/channel/channel.component';
 
 export const routes: Routes = [
-    { path: "", component: LoginComponent },
+    { path: "", redirectTo: "login", pathMatch: 'full' },
     { path: "login", component: LoginComponent },
     { path: "dashboard", component: DashboardComponent , children: [
         { path: "channel", component: ChannelComponent, canActivate: [AuthGuard] },
         { path: "account", component: AccountComponent, canActivate: [AuthGuard]}
     ], canActivate: [AuthGuard]},
+    { path: "**", redirectTo: "login", pathMatch: 'full' }
 ];
