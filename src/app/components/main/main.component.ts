@@ -43,6 +43,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.fetchUser();
+    this.dataService.fetchContacts();
     this.dataService.fetchChannels();
     this.dataService.fetchDirectMessages();
     this.dataService.fetchMessages(1);

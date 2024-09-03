@@ -4,7 +4,14 @@ import { Injectable, Signal, signal } from '@angular/core';
 export interface Member {
   fullName: string,
   id: number,
-  image: string
+  image: string,
+  contacts: number[]
+}
+
+export interface ShortMember {
+  fullName: string,
+  id: number,
+  image: string,
 }
 
 export interface Channel {
@@ -12,14 +19,14 @@ export interface Channel {
   created: Date,
   name: string,
   description: string,
-  createdBy: Member,
-  members: Member[]
+  createdBy: ShortMember,
+  members: ShortMember[]
 }
 
 export interface Message {
   id: number,
   created: Date,
-  createdBy: Member,
+  createdBy: ShortMember,
   content: string,
   channel: number
 }
@@ -33,8 +40,19 @@ export class DataService {
     {
       fullName: "Hans Dieter",
       id: 1,
-      image: "profile8.jpg"
+      image: "profile8.jpg",
+      contacts: [1, 2, 3, 4, 5, 6]
     }
+
+
+  dummyContacts: ShortMember[] = [
+    { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
+    { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
+    { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
+    { fullName: "Marie Löffel", id: 4, image: "profile8.jpg" },
+    { fullName: "Renate Bäcker", id: 5, image: "profile8.jpg" },
+    { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
+  ]
 
 
   dummyMessages: Message[] = [
@@ -173,7 +191,10 @@ export class DataService {
     }
   ]
 
-  private user = signal<Member>({ id: 0, fullName: "Administrator", image: "profile8.jpg" });
+
+  private user = signal<Member>({ id: 0, fullName: "Administrator", image: "profile8.jpg", contacts: [0] });
+
+  private contacts = signal<ShortMember[]>([{ id: 0, fullName: "Member", image: "profile8.jpg" }]);
 
   private currentChannel = signal<Channel>(this.dummyCurrentChannel);
 
@@ -198,6 +219,16 @@ export class DataService {
 
   getUser() {
     return this.user;
+  }
+
+
+  setContacts(data: ShortMember[]) {
+    this.contacts.set(data);
+  }
+
+
+  getContacts() {
+    return this.contacts;
   }
 
 
@@ -262,6 +293,14 @@ export class DataService {
 
 
   /**
+   * Simulated API call to fetch the contacts of the logged-in user.
+   */
+  fetchContacts() {
+    this.setContacts(this.dummyContacts);
+  }
+
+
+  /**
    * Simulated API call to fetch all Channels for the current logged-in user.
    */
   fetchChannels() {
@@ -306,7 +345,7 @@ export class DataService {
         content: message,
         channel: currentChannel().id
       },]
-    ); 
+    );
     this.setMessages(combined);
   }
 
