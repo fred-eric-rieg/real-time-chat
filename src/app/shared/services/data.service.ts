@@ -331,7 +331,6 @@ export class DataService {
    */
   fetchMessages(id: number) {
     let filteredMessages = this.dummyMessages.filter(message => message.channel === id);
-    console.log(filteredMessages);
     this.setMessages(filteredMessages); // For demo the messages main channel is always loaded first.
   }
 

@@ -20,6 +20,4 @@ export class SidenavService {
   getDrawer(): Signal<MatDrawer | null> {
     return this.drawerSignal;
   }
-
-
 }

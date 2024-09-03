@@ -21,9 +21,7 @@ export class DashboardComponent {
   }
 
 
-  
   openSnackBar(message: string, action: string, arg2: { duration: number; }) {
     this._snackBar.open(message, action, arg2);
   }
-
 }

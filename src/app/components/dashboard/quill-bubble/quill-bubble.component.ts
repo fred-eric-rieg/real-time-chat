@@ -38,8 +38,6 @@ export class QuillBubbleComponent {
 
   private checkKeyCombination(event: KeyboardEvent) {
     if (event.ctrlKey && event.key === 'Enter') {
-      console.log('Control + Enter was pressed');
-      // Sende Nachricht, wenn true
       this.sanitizeMessage();
     }
   }
