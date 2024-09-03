@@ -51,7 +51,7 @@ export class SidenavComponent implements AfterViewInit, OnInit {
     this.dataService.setCurrentChannel(channel);
     this.dataService.fetchMessages(channel.id);
     this.drawer.toggle();
-    this.router.navigate(["/dashboard"]);
+    this.router.navigate(["/dashboard/channel"]);
   }
 
 
@@ -66,6 +66,7 @@ export class SidenavComponent implements AfterViewInit, OnInit {
   }
 
   goToAccount() {
-    this.router.navigate(["/account"]);
+    this.drawer.toggle();
+    this.router.navigate(["dashboard/account"]);
   }
 }

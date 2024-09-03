@@ -84,10 +84,13 @@
         <div class="content-bottom-area">
 
             <div class="message" *ngFor="let message of messages()">
-                <img style="width: 40px; border-radius: 16px; object-fit: contain;" [src]="message.createdBy.image" alt="profile picture">
+                <img style="width: 40px; border-radius: 16px; object-fit: contain;" [src]="message.createdBy.image"
+                    alt="profile picture">
                 <mat-card>
                     <mat-card-content style="display: flex; flex-direction: column;">
-                        <span style="font-size: 12px; line-height: 0.5; margin-bottom: 8px; color: var(--font-light);">{{message.createdBy.fullName}} - {{message.created | date: "short"}}</span>
+                        <span
+                            style="font-size: 12px; line-height: 0.5; margin-bottom: 8px; color: var(--font-light);">{{message.createdBy.fullName}}
+                            - {{message.created | date: "short"}}</span>
                         <span [innerHTML]="getSanitizedMessage(message.content)"></span>
                     </mat-card-content>
                 </mat-card>
@@ -99,6 +102,7 @@
         <div style="margin-left: 8px; margin-right: 8px; margin-top: 8px; position: relative;">
             <app-quill-bubble></app-quill-bubble>
         </div>
-        
+
 
     </div>
+</div>

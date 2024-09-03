@@ -1,11 +1,15 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AccountComponent } from './components/account/account.component';
+import { AccountComponent } from './components/dashboard/account/account.component';
+import { AuthGuard } from './guard/auth.guard';
+import { ChannelComponent } from './components/dashboard/channel/channel.component';
 
 export const routes: Routes = [
     { path: "", component: LoginComponent },
     { path: "login", component: LoginComponent },
-    { path: "dashboard", component: DashboardComponent },
-    { path: "account", component: AccountComponent },
+    { path: "dashboard", component: DashboardComponent , children: [
+        { path: "channel", component: ChannelComponent, canActivate: [AuthGuard] },
+        { path: "account", component: AccountComponent, canActivate: [AuthGuard]}
+    ], canActivate: [AuthGuard]},
 ];

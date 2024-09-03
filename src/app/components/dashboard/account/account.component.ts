@@ -1,7 +1,7 @@
 import { Component, OnInit, Signal } from '@angular/core';
-import { HeaderComponent } from '../dashboard/header/header.component';
-import { SidenavComponent } from '../dashboard/sidenav/sidenav.component';
-import { DataService, Member } from '../../shared/services/data.service';
+import { HeaderComponent } from '../header/header.component';
+import { SidenavComponent } from '../sidenav/sidenav.component';
+import { DataService, Member } from '../../../shared/services/data.service';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({

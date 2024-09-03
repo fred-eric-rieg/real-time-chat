@@ -10,13 +10,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-channel',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, CommonModule, MatMenuModule, MatCardModule, QuillBubbleComponent],
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+  templateUrl: './channel.component.html',
+  styleUrl: './channel.component.scss'
 })
-export class MainComponent implements OnInit {
+export class ChannelComponent implements OnInit {
 
   @ViewChild('leftmenu') leftmenu!: ElementRef;
   @ViewChild('content') content!: ElementRef;
@@ -85,5 +85,4 @@ export class MainComponent implements OnInit {
   getSanitizedMessage(message: string) {
     return this.sanitizer.sanitize(SecurityContext.HTML, message);
   }
-  
 }
