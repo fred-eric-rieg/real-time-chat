@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, HostListener, Renderer2, SecurityContext, ViewChild } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, HostListener, Output, Renderer2, SecurityContext, ViewChild } from '@angular/core';
 import { EditorChangeContent, EditorChangeSelection, QuillEditorComponent } from 'ngx-quill';
 import Quill from 'quill'
 import Block from 'quill/blots/block';
@@ -22,6 +22,8 @@ export class QuillBubbleComponent {
   blurred = false;
   focused = false;
   isEmpty = true;
+
+  @Output() messageSent = new EventEmitter<boolean>();
 
   @ViewChild(QuillEditorComponent) quillEditor!: QuillEditorComponent;
 
@@ -70,9 +72,10 @@ export class QuillBubbleComponent {
     const rawContent = this.quillEditor.quillEditor.root.innerHTML;
     if (rawContent != '<div><br></div>') {
       let content = this.sanitizer.sanitize(SecurityContext.HTML, rawContent);
-
       this.dataService.sendMessage(content || "***Content contained XSS - du Schwein!***");
+      this.messageSent.emit(true);
       this.quillEditor.quillEditor.setText('');
+      this.messageSent.emit(false);
     } else {
       console.log("Nothing there...")
     }

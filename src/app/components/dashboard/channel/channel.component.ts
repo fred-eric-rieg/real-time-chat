@@ -20,6 +20,7 @@ export class ChannelComponent implements OnInit {
 
   @ViewChild('leftmenu') leftmenu!: ElementRef;
   @ViewChild('content') content!: ElementRef;
+  @ViewChild('messagesArea') messagesArea!: ElementRef;
 
   isShrunk = false;
 
@@ -84,5 +85,20 @@ export class ChannelComponent implements OnInit {
 
   getSanitizedMessage(message: string) {
     return this.sanitizer.sanitize(SecurityContext.HTML, message);
+  }
+
+  scrollToLatestMessage(isMessageSent: boolean) {
+    const element = this.messagesArea.nativeElement;
+    if (isMessageSent) {
+      // Needs delay to work, otherwise it seems the scroll happens before the DOM is updated with a new chat message!?
+      setTimeout( () => {
+        element.scrollTop = element.scrollHeight;
+      }, 255);
+    }
+  }
+
+  scroll() {
+    const element = this.messagesArea.nativeElement;
+    element.scrollTop = element.scrollHeight;
   }
 }

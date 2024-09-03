@@ -81,7 +81,7 @@
             </span>
         </div>
 
-        <div class="content-bottom-area">
+        <div class="content-bottom-area" #messagesArea>
 
             <div class="message" *ngFor="let message of messages()">
                 <img style="width: 40px; border-radius: 16px; object-fit: contain;" [src]="message.createdBy.image"
@@ -100,7 +100,7 @@
         </div>
 
         <div style="margin-left: 8px; margin-right: 8px; margin-top: 8px; position: relative;">
-            <app-quill-bubble></app-quill-bubble>
+            <app-quill-bubble (messageSent)="scrollToLatestMessage($event)"></app-quill-bubble>
         </div>
 
 
