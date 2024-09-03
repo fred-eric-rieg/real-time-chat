@@ -7,6 +7,7 @@ import { Channel, DataService, Member, Message, ShortMember } from '../../../sha
 import { MatCardModule } from '@angular/material/card';
 import { QuillBubbleComponent } from "../quill-bubble/quill-bubble.component";
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class ChannelComponent implements OnInit {
 
   user!: Signal<Member>;
 
-  constructor(private renderer: Renderer2, public dataService: DataService, private sanitizer: DomSanitizer) {
+  constructor(private renderer: Renderer2, public dataService: DataService, private sanitizer: DomSanitizer, private router: Router) {
 
   };
 
@@ -47,7 +48,8 @@ export class ChannelComponent implements OnInit {
     this.dataService.fetchContacts();
     this.dataService.fetchChannels();
     this.dataService.fetchDirectMessages();
-    this.dataService.fetchMessages(1);
+    let id = +this.router.url.split("/")[3]; // Get Channel id from url
+    this.dataService.fetchMessages(id); // fetch Messages of channel id
     this.user = this.dataService.getUser();
     this.channel = this.dataService.getCurrentChannel();
     this.channels = this.dataService.getAllChannels();
@@ -74,6 +76,7 @@ export class ChannelComponent implements OnInit {
   switchToChannel(channel: Channel) {
     this.dataService.setCurrentChannel(channel);
     this.dataService.fetchMessages(channel.id);
+    this.router.navigate(["/dashboard/channel/" + channel.id]);
   }
 
 

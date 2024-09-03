@@ -27,7 +27,7 @@ export class LoginComponent {
 
 
   login() {
-    this.router.navigate(["/dashboard/channel"]);
+    this.router.navigate(["/dashboard/channel/1"]);
   }
 
 
