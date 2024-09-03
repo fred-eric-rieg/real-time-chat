@@ -1,1 +1,45 @@
-<p>login works!</p>
+<div class="background">
+
+    <mat-card appearance="outlined">
+        <mat-card-content>
+
+            <div class="title">
+                <span>Login</span>
+            </div>
+            
+
+            <form [formGroup]="loginForm" class="form">
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput [formControl]="loginForm.controls.emailFormControl" placeholder="Ex. pat@example.com">
+                    @if (loginForm.controls.emailFormControl.hasError('email') && !loginForm.controls.emailFormControl.hasError('required')) {
+                    <mat-error>Please enter a valid email address</mat-error>
+                    }
+                    @if (loginForm.controls.emailFormControl.hasError('required')) {
+                    <mat-error>Email is <strong>required</strong></mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput [formControl]="loginForm.controls.passwordFormControl" placeholder="Your Password">
+                    @if (loginForm.controls.passwordFormControl.hasError('required')) {
+                    <mat-error>Email is <strong>required</strong></mat-error>
+                    }
+                </mat-form-field>
+
+                <button mat-raised-button (click)="login()">Login</button>
+            </form>
+
+        </mat-card-content>
+    </mat-card>
+
+    <div class="signup">
+        <span>New here?</span>
+        <button mat-flat-button>Sign Up</button>
+    </div>
+   
+
+
+</div>

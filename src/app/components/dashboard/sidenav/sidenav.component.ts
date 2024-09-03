@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavService } from '../../../shared/services/sidenav.service';
 import { Channel, DataService, Member, ShortMember } from '../../../shared/services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -30,7 +31,7 @@ export class SidenavComponent implements AfterViewInit, OnInit {
   user!: Signal<Member>;
   
 
-  constructor(private sidenavService: SidenavService, private dataService: DataService) {}
+  constructor(private sidenavService: SidenavService, private dataService: DataService, private router: Router) {}
 
 
   ngOnInit(): void {
@@ -58,4 +59,8 @@ export class SidenavComponent implements AfterViewInit, OnInit {
     return members.find(members => members.id === currentUser.id)?.fullName || "Unknown";
   }
   
+
+  logout() {
+    this.router.navigate(["/login"]);
+  }
 }
