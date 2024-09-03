@@ -42,6 +42,10 @@ quill-editor {
     }
 }
 
+.mat-mdc-menu-panel {
+    background-color: var(--bg-0) !important;
+}
+
 :root {
     --bg-0: #A1D6B2;
     --bg-1: #CEDF9F;
