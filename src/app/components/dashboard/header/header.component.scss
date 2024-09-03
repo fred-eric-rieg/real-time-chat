@@ -13,6 +13,13 @@
 }
 
 .title {
-    font: 400 2.812rem / 3.25rem Roboto, sans-serif;
+    font: 400 36px / 52px Roboto, sans-serif;
     letter-spacing: 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .title {
+        font: 400 24px / 52px Roboto, sans-serif;
+    }
+
 }

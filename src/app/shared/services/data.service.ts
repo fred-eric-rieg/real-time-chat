@@ -5,7 +5,8 @@ export interface Member {
   fullName: string,
   id: number,
   image: string,
-  contacts: number[]
+  contacts: number[],
+  email: string,
 }
 
 export interface ShortMember {
@@ -41,7 +42,8 @@ export class DataService {
       fullName: "Hans Dieter",
       id: 1,
       image: "profile8.jpg",
-      contacts: [1, 2, 3, 4, 5, 6]
+      contacts: [1, 2, 3, 4, 5, 6],
+      email: "hansdieter@mail.de"
     }
 
 
@@ -192,7 +194,7 @@ export class DataService {
   ]
 
 
-  private user = signal<Member>({ id: 0, fullName: "Administrator", image: "profile8.jpg", contacts: [0] });
+  private user = signal<Member>({ id: 0, fullName: "Administrator", image: "profile8.jpg", contacts: [0], email: "mail@dev.de" });
 
   private contacts = signal<ShortMember[]>([{ id: 0, fullName: "Member", image: "profile8.jpg" }]);
 
