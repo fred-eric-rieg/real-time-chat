@@ -16,11 +16,24 @@
 }
 
 .top-area {
-    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.middle-area {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
 }
 
 .bottom-area {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+
+    button {
+        justify-content: flex-start;
+    }
 }

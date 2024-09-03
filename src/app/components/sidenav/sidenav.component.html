@@ -6,7 +6,15 @@
             <button mat-icon-button (click)="drawer.toggle()">
                 <mat-icon>close</mat-icon>
             </button>
+            <span>Hello, {{user().fullName}}.</span>
         </div>
+
+        <div class="middle-area">
+            <button mat-flat-button>Log Out</button>
+            <button mat-raised-button>My Account</button>
+        </div>
+
+        
 
         <div class="bottom-area">
             <button mat-button (click)="showChannels = !showChannels">
