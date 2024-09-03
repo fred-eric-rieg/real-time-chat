@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, Renderer2, SecurityContext, Signal, View
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { Channel, DataService, Member, Message } from '../../shared/services/data.service';
+import { Channel, DataService, Member, Message, ShortMember } from '../../../shared/services/data.service';
 import { MatCardModule } from '@angular/material/card';
 import { QuillBubbleComponent } from "../quill-bubble/quill-bubble.component";
 import { DomSanitizer } from '@angular/platform-browser';
@@ -76,7 +76,7 @@ export class MainComponent implements OnInit {
   }
 
 
-  returnChatpartner(members: Member[]) {
+  returnChatpartner(members: ShortMember[]) {
     const currentUser = this.user();
     return members.find(members => members.id === currentUser.id)?.fullName || "Unknown";
   }

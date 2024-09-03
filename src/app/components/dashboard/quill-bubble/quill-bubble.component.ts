@@ -2,7 +2,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, HostListener, Renderer2, SecurityCon
 import { EditorChangeContent, EditorChangeSelection, QuillEditorComponent } from 'ngx-quill';
 import Quill from 'quill'
 import Block from 'quill/blots/block';
-import { DataService } from '../../shared/services/data.service';
+import { DataService } from '../../../shared/services/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';

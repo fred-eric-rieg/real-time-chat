@@ -3,8 +3,8 @@ import { AfterViewInit, Component, OnInit, Signal, ViewChild } from '@angular/co
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
-import { SidenavService } from '../../shared/services/sidenav.service';
-import { Channel, DataService, Member, ShortMember } from '../../shared/services/data.service';
+import { SidenavService } from '../../../shared/services/sidenav.service';
+import { Channel, DataService, Member, ShortMember } from '../../../shared/services/data.service';
 
 @Component({
   selector: 'app-sidenav',
