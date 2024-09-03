@@ -6,7 +6,7 @@
             <button mat-icon-button (click)="drawer.toggle()">
                 <mat-icon>close</mat-icon>
             </button>
-            <span>Hello, {{user().fullName}}.</span>
+            <span>Hello, {{user()?.fullName || "Unknown"}}.</span>
         </div>
 
         <div class="middle-area">

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2, SecurityContext, Signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, SecurityContext, signal, Signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -25,13 +25,14 @@ export class ChannelComponent implements OnInit {
 
   isShrunk = false;
 
-  channel!: Signal<Channel>;
-  channels!: Signal<Channel[]>;
+  channel: Signal<Channel | null> = signal(null);
 
-  directMessage!: Signal<Channel[]>;
-  directMessages!: Signal<Channel[]>;
+  channels: Signal<Channel[] | []> = signal([]);
 
-  messages!: Signal<Message[]>;
+  directMessage: Signal<Channel[] | []> = signal([]);
+  directMessages: Signal<Channel[] | []> = signal([]);
+
+  messages: Signal<Message[] | []> = signal([]);
 
   showChannels = false;
   showDMs = false;
@@ -44,17 +45,7 @@ export class ChannelComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.dataService.fetchUser();
-    this.dataService.fetchContacts();
-    this.dataService.fetchChannels();
-    this.dataService.fetchDirectMessages();
-    let id = +this.router.url.split("/")[3]; // Get Channel id from url
-    this.dataService.fetchMessages(id); // fetch Messages of channel id
-    this.user = this.dataService.getUser();
-    this.channel = this.dataService.getCurrentChannel();
-    this.channels = this.dataService.getAllChannels();
-    this.directMessages = this.dataService.getAllDirectMessages();
-    this.messages = this.dataService.getMessages();
+
   }
 
 
@@ -94,7 +85,7 @@ export class ChannelComponent implements OnInit {
     const element = this.messagesArea.nativeElement;
     if (isMessageSent) {
       // Needs delay to work, otherwise it seems the scroll happens before the DOM is updated with a new chat message!?
-      setTimeout( () => {
+      setTimeout(() => {
         element.scrollTop = element.scrollHeight;
       }, 255);
     }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit, Signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, signal, Signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
@@ -22,23 +22,20 @@ export class SidenavComponent implements AfterViewInit, OnInit {
   showChannels = false;
   showDMs = false;
 
-  channel!: Signal<Channel>;
-  channels!: Signal<Channel[]>;
+  channel: Signal<Channel | null> = signal(null);
+  channels: Signal<Channel[] | []> = signal([]);
 
-  directMessage!: Signal<Channel[]>;
-  directMessages!: Signal<Channel[]>;
+  directMessage: Signal<Channel[]> = signal([]);;
+  directMessages: Signal<Channel[]> = signal([]);;
 
-  user!: Signal<Member>;
-  
+  user: Signal<Member | null> = signal(null);;
 
-  constructor(private sidenavService: SidenavService, private dataService: DataService, private router: Router) {}
+
+  constructor(private sidenavService: SidenavService, private dataService: DataService, private router: Router) { }
 
 
   ngOnInit(): void {
-    this.user = this.dataService.getUser();
-    this.channel = this.dataService.getCurrentChannel();
-    this.channels = this.dataService.getAllChannels();
-    this.directMessages = this.dataService.getAllDirectMessages();
+
   }
 
 
@@ -57,9 +54,9 @@ export class SidenavComponent implements AfterViewInit, OnInit {
 
   returnChatpartner(members: ShortMember[]) {
     const currentUser = this.user();
-    return members.find(members => members.id === currentUser.id)?.fullName || "Unknown";
+    return members.find(members => members.id === currentUser?.id)?.fullName || "Unknown";
   }
-  
+
 
   logout() {
     this.router.navigate(["/login"]);

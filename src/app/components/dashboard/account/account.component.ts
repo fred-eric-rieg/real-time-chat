@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal } from '@angular/core';
+import { Component, OnInit, signal, Signal } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { DataService, Member } from '../../../shared/services/data.service';
@@ -13,17 +13,13 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AccountComponent implements OnInit {
 
-  user!: Signal<Member>;
+  user: Signal<Member | null> = signal(null);
 
   constructor(private dataService: DataService) {}
 
 
   ngOnInit(): void {
-    this.dataService.fetchUser();
-    this.dataService.fetchChannels();
-    this.dataService.fetchContacts();
-    this.dataService.fetchDirectMessages();
-    this.user = this.dataService.getUser();
+    
   }
 
 }

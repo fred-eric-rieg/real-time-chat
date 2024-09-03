@@ -14,8 +14,13 @@
                 <mat-icon>forum</mat-icon>
                 <mat-menu #chans="matMenu">
                     <p style="margin-left: 8px;">Channels</p>
-                    <button mat-menu-item *ngFor="let channel of channels()"
-                        (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon>{{channel.name}}</button>
+                    <ng-container *ngIf="channels() && channels().length; else noChannelsSmall">
+                        <button mat-menu-item *ngFor="let channel of channels()"
+                            (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon>{{channel.name}}</button>
+                    </ng-container>
+                    <ng-template #noChannelsSmall>
+                        <span>No channels available</span>
+                    </ng-template>
                 </mat-menu>
             </button>
 
@@ -23,8 +28,13 @@
                 <mat-icon>3p</mat-icon>
                 <mat-menu #dms="matMenu">
                     <p style="margin-left: 8px;">Direct Messages</p>
-                    <button mat-menu-item *ngFor="let dm of directMessages()"
-                        (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon>{{returnChatpartner(dm.members)}}</button>
+                    <ng-container *ngIf="directMessages() && directMessages().length; else noDMSmall">
+                        <button mat-menu-item *ngFor="let dm of directMessages()"
+                            (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon>{{returnChatpartner(dm.members)}}</button>
+                    </ng-container>
+                    <ng-template #noDMSmall>
+                        <span>No messages yet</span>
+                    </ng-template>
                 </mat-menu>
             </button>
         </div>
@@ -37,9 +47,13 @@
                 <mat-icon *ngIf="showChannels">chevron_left</mat-icon>
             </button>
             <ng-container *ngIf="showChannels">
-                <button mat-button *ngFor="let channel of channels()"
-                    (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon> {{channel.name}}</button>
-
+                <ng-container *ngIf="channels() && channels().length; else noChannelsBig">
+                    <button mat-button *ngFor="let channel of channels()"
+                        (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon> {{channel.name}}</button>
+                </ng-container>
+                <ng-template #noChannelsBig>
+                    <span>No channels available</span>
+                </ng-template>
             </ng-container>
 
             <button mat-button (click)="showDMs = !showDMs">
@@ -48,9 +62,14 @@
                 <mat-icon *ngIf="showDMs">chevron_left</mat-icon>
             </button>
             <ng-container *ngIf="showDMs">
-                <button mat-button *ngFor="let dm of directMessages()"
-                    (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon> {{returnChatpartner(dm.members)}}</button>
-
+                <ng-container *ngIf="directMessages() && directMessages().length; else noDMBig">
+                    <button mat-button *ngFor="let dm of directMessages()"
+                        (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon> {{returnChatpartner(dm.members)}}
+                    </button>
+                </ng-container>
+                <ng-template #noDMBig>
+                    <span>No messages yet</span>
+                </ng-template>
             </ng-container>
         </div>
 
@@ -58,51 +77,76 @@
     </div>
 
     <div class="content-container hide-overflow" #content>
-        <div class="content-top-area">
-            <span class="channel-title">{{channel().name}}</span>
-            <span>Created on {{channel().created | date: "short"}} by {{channel().createdBy.fullName}}.</span>
-            <span class="description">Description: {{channel().description}}</span>
-            <span class="members-area">
-                <span class="members-list">
-                    <span>Members:</span>
-                    <button mat-button
-                        *ngFor="let member of channel().members"><mat-icon>person</mat-icon>{{member.fullName}}</button>
+        <ng-container *ngIf="channel(); else showButton">
+            <div class="content-top-area">
+                <span class="channel-title">{{channel()?.name || "Title"}}</span>
+                <span>Created on {{channel()?.created | date: "short" || ""}} by {{channel()?.createdBy?.fullName ||
+                    "..."}}.</span>
+                <span class="description">Description: {{channel()?.description || "..."}}</span>
+                <span class="members-area">
+                    <span class="members-list">
+                        <span>Members:</span>
+                        <ng-container *ngIf="channel(); else noCurrentChannel">
+                            <button mat-button *ngFor="let member of channel()?.members">
+                                <mat-icon>person</mat-icon>{{member.fullName}}
+                            </button>
+                        </ng-container>
+                        <ng-template #noCurrentChannel>
+                            <span>...</span>
+                        </ng-template>
+                    </span>
+                    <span class="more-btn">
+                        <span>Members:</span>
+                        <button mat-icon-button [matMenuTriggerFor]="menu">
+                            <mat-icon>more_horiz</mat-icon>
+                            <mat-menu #menu="matMenu">
+                                <ng-container *ngIf="channel(); else noCurrentChannelSmall">
+                                    <button mat-menu-item *ngFor="let member of channel()?.members">
+                                        <mat-icon>person</mat-icon>{{member.fullName}}
+                                    </button>
+                                </ng-container>
+                                <ng-template #noCurrentChannelSmall>
+                                    <span>...</span>
+                                </ng-template>
+                            </mat-menu>
+                        </button>
+                    </span>
                 </span>
-                <span class="more-btn">
-                    <span>Members:</span>
-                    <button mat-icon-button [matMenuTriggerFor]="menu">
-                        <mat-icon>more_horiz</mat-icon>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item
-                                *ngFor="let member of channel().members"><mat-icon>person</mat-icon>{{member.fullName}}</button>
-                        </mat-menu>
-                    </button>
-                </span>
-            </span>
-        </div>
-
-        <div class="content-bottom-area" #messagesArea>
-
-            <div class="message" *ngFor="let message of messages()">
-                <img style="width: 40px; border-radius: 16px; object-fit: contain;" [src]="message.createdBy.image"
-                    alt="profile picture">
-                <mat-card>
-                    <mat-card-content style="display: flex; flex-direction: column;">
-                        <span
-                            style="font-size: 12px; line-height: 0.5; margin-bottom: 8px; color: var(--font-light);">{{message.createdBy.fullName}}
-                            - {{message.created | date: "short"}}</span>
-                        <span [innerHTML]="getSanitizedMessage(message.content)"></span>
-                    </mat-card-content>
-                </mat-card>
             </div>
 
+            <div class="content-bottom-area" #messagesArea>
+                <ng-container *ngIf="messages() && messages().length; else noMessages">
+                    <div class="message" *ngFor="let message of messages()">
+                        <img style="width: 40px; border-radius: 16px; object-fit: contain;"
+                            [src]="message.createdBy.image" alt="profile picture">
+                        <mat-card>
+                            <mat-card-content style="display: flex; flex-direction: column;">
+                                <span
+                                    style="font-size: 12px; line-height: 0.5; margin-bottom: 8px; color: var(--font-light);">{{message.createdBy.fullName}}
+                                    - {{message.created | date: "short"}}</span>
+                                <span [innerHTML]="getSanitizedMessage(message.content)"></span>
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </ng-container>
+                <ng-template #noMessages>
+                    <span>No messages yet</span>
+                </ng-template>
 
-        </div>
 
-        <div style="margin-left: 8px; margin-right: 8px; margin-top: 8px; position: relative;">
-            <app-quill-bubble (messageSent)="scrollToLatestMessage($event)"></app-quill-bubble>
-        </div>
+            </div>
 
+            <div style="margin-left: 8px; margin-right: 8px; margin-top: 8px; position: relative;">
+                <app-quill-bubble (messageSent)="scrollToLatestMessage($event)"></app-quill-bubble>
+            </div>
 
+        </ng-container>
+        <ng-template #showButton>
+            <span>No Channels yet</span>
+            <button mat-raised-button>Create Channel</button>
+        </ng-template>
     </div>
+
+
+
 </div>
