@@ -25,7 +25,7 @@
                     <mat-label>Password</mat-label>
                     <input type="password" matInput [formControl]="loginForm.controls.passwordFormControl" placeholder="Your Password">
                     @if (loginForm.controls.passwordFormControl.hasError('required')) {
-                    <mat-error>Email is <strong>required</strong></mat-error>
+                    <mat-error>Password is <strong>required</strong></mat-error>
                     }
                 </mat-form-field>
 
@@ -37,7 +37,7 @@
 
     <div class="signup">
         <span>New here?</span>
-        <button mat-flat-button>Sign Up</button>
+        <button mat-flat-button (click)="goToSignup()">Sign Up</button>
     </div>
    
 

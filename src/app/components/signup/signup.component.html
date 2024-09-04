@@ -1,0 +1,67 @@
+<div class="background">
+
+    <mat-card appearance="outlined">
+        <mat-card-content>
+
+            <div class="title">
+                <span>Signup</span>
+            </div>
+
+
+            <form [formGroup]="signupForm" class="form" (ngSubmit)="signup()">
+
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+                    @if (signupForm.get('email')?.hasError('email') && !signupForm.get('email')?.hasError('required')) {
+                    <mat-error>Please enter a valid email address</mat-error>
+                    }
+                    @if (signupForm.get('email')?.hasError('required')) {
+                    <mat-error>Email is <strong>required</strong></mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Full Name</mat-label>
+                    <input type="email" matInput formControlName="fullName" placeholder="Hans Dieter">
+                    @if (signupForm.get('fullName')?.hasError('required')) {
+                    <mat-error>Full name is <strong>required</strong></mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput formControlName="password" placeholder="Set Password">
+                    @if (signupForm.get('password')?.hasError('required')) {
+                    <mat-error>Password is <strong>required</strong></mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Repeat Password</mat-label>
+                    <input type="password" matInput formControlName="repeat" placeholder="Repeat Password">
+                    @if (signupForm.get('repeat')?.hasError('required')) {
+                    <mat-error>Password is <strong>required</strong></mat-error>
+                    }
+                </mat-form-field>
+
+                @if (signupForm.hasError('nomatch')) {
+                <mat-error>Passwords <strong>do not match</strong></mat-error>
+                }
+
+                <button mat-raised-button type="submit" [disabled]="signupForm.invalid" #signupBtn>Sign me
+                    Up</button>
+            </form>
+
+
+        </mat-card-content>
+    </mat-card>
+
+    <div class="signup">
+        <span>Already a member?</span>
+        <button mat-flat-button (click)="returnToLogin()">Return to Login</button>
+    </div>
+
+
+
+</div>
