@@ -5,10 +5,38 @@
     </div>
 
 
-    <div class="details">
+    <div class="details" *ngIf="!isEditing">
         <img [src]="user()?.image" alt="User Profile Picture">
         <span>Full Name: {{user()?.fullName || "Unknown"}}</span>
         <span>Email: {{user()?.email || "Unknown"}}</span>
-        <button mat-raised-button>Edit Profile</button>
+        <button mat-raised-button (click)="isEditing = !isEditing">Edit Profile</button>
+    </div>
+
+    <div class="details" *ngIf="isEditing">
+        <form>
+
+            <div class="image-input">
+                <mat-label>Profile Picture</mat-label>
+                <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+                <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+                <mat-hint>Selected: {{temporaryImg}}</mat-hint>
+            </div>
+
+            <mat-form-field>
+                <mat-label>Full Name</mat-label>
+                <input matInput [value]="user()?.fullName">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput [value]="user()?.email">
+            </mat-form-field>
+        </form>
+
+        <div class="btn-container">
+            <button mat-button (click)="isEditing = !isEditing">Cancel</button>
+            <button mat-raised-button (click)="updateProfile()">Update</button>
+        </div>
+        
     </div>
 </div>

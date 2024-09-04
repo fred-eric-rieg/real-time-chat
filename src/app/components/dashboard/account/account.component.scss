@@ -29,7 +29,7 @@
     align-self: center;
     gap: 16px;
     border: 2px solid var(--border);
-    width: fit-content;
+    width: 300px;
     padding: 16px;
     border-radius: 8px;
     background-color: var(--text);
@@ -41,6 +41,23 @@ img {
     border-radius: 8px;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.image-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.btn-container {
+    display: flex;
+    gap: 8px;
+}
 
 
 @media screen and (max-width: 1024px) {
