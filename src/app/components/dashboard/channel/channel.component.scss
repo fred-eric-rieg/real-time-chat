@@ -104,6 +104,14 @@
     min-width: 56px;
 }
 
+.empty-channel {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 300px;
+}
+
 @media screen and (max-width: 1024px) {
     .left-menu-area {
         display: none;

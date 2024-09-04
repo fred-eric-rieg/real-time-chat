@@ -52,7 +52,7 @@
                         (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon> {{channel.name}}</button>
                 </ng-container>
                 <ng-template #noChannelsBig>
-                    <span>No channels available</span>
+                    <span>Join or create a channel to see them here</span>
                 </ng-template>
             </ng-container>
 
@@ -68,7 +68,7 @@
                     </button>
                 </ng-container>
                 <ng-template #noDMBig>
-                    <span>No messages yet</span>
+                    <span>Write another user to see the direct messages here</span>
                 </ng-template>
             </ng-container>
         </div>
@@ -142,8 +142,11 @@
 
         </ng-container>
         <ng-template #showButton>
-            <span>No Channels yet</span>
-            <button mat-raised-button>Create Channel</button>
+            <div class="empty-channel">
+                <span>Join or create a channel</span>
+                <button mat-raised-button>Join Channel</button>
+                <button mat-raised-button>Create Channel</button>
+            </div>
         </ng-template>
     </div>
 
