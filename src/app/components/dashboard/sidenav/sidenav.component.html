@@ -14,7 +14,7 @@
             <button mat-raised-button (click)="goToAccount()">My Account</button>
         </div>
 
-        
+
 
         <div class="bottom-area">
             <button mat-button (click)="showChannels = !showChannels">
@@ -22,23 +22,44 @@
                 <mat-icon *ngIf="!showChannels">chevron_right</mat-icon>
                 <mat-icon *ngIf="showChannels">chevron_left</mat-icon>
             </button>
+
             <ng-container *ngIf="showChannels">
-                <button mat-button *ngFor="let channel of channels()" (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon> {{channel.name}}</button>
-                    
+                <button mat-button><mat-icon>login</mat-icon> Join Channel</button>
+                <button mat-button><mat-icon>add</mat-icon> Create Channel</button>
+
+                <span *ngIf="!channels().length">No channels yet</span>
+
+                <button mat-button *ngFor="let channel of channels()"
+                    (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon> {{channel.name}}</button>
+
             </ng-container>
-    
+
+            <div class="line"></div>
+
             <button mat-button (click)="showDMs = !showDMs">
                 Direct Messages
                 <mat-icon *ngIf="!showDMs">chevron_right</mat-icon>
                 <mat-icon *ngIf="showDMs">chevron_left</mat-icon>
             </button>
+
+
             <ng-container *ngIf="showDMs">
-                <button mat-button *ngFor="let dm of directMessages()" (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon> {{returnChatpartner(dm.members)}}</button>
-                    
+
+
+                <button mat-button><mat-icon>add</mat-icon> Write Someone</button>
+
+                <span *ngIf="!directMessages().length">No messages yet</span>
+
+                <div class="line" *ngIf="directMessage().length"></div>
+
+                <button mat-button *ngFor="let dm of directMessages()"
+                    (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon>
+                    {{returnChatpartner(dm.members)}}</button>
+
             </ng-container>
         </div>
 
-        
+
 
     </mat-drawer>
 

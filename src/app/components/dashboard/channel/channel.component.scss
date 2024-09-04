@@ -112,6 +112,12 @@
     width: 300px;
 }
 
+.line {
+    height: 0;
+    width: 100%;
+    border: 1px solid var(--border);
+}
+
 @media screen and (max-width: 1024px) {
     .left-menu-area {
         display: none;

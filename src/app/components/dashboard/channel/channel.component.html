@@ -19,7 +19,9 @@
                             (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon>{{channel.name}}</button>
                     </ng-container>
                     <ng-template #noChannelsSmall>
-                        <span>No channels available</span>
+                        <span>No channels yet</span>
+                        <button mat-menu-item><mat-icon>login</mat-icon> Join Channel</button>
+                        <button mat-menu-item><mat-icon>add</mat-icon> Create Channel</button>
                     </ng-template>
                 </mat-menu>
             </button>
@@ -34,6 +36,7 @@
                     </ng-container>
                     <ng-template #noDMSmall>
                         <span>No messages yet</span>
+                        <button mat-menu-item><mat-icon>add</mat-icon> Write Someone</button>
                     </ng-template>
                 </mat-menu>
             </button>
@@ -48,13 +51,19 @@
             </button>
             <ng-container *ngIf="showChannels">
                 <ng-container *ngIf="channels() && channels().length; else noChannelsBig">
+                    <button mat-button><mat-icon>login</mat-icon> Join Channel</button>
+                    <button mat-button><mat-icon>add</mat-icon> Create Channel</button>
                     <button mat-button *ngFor="let channel of channels()"
                         (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon> {{channel.name}}</button>
                 </ng-container>
                 <ng-template #noChannelsBig>
-                    <span>Join or create a channel to see them here</span>
+                    <button mat-button><mat-icon>login</mat-icon> Join Channel</button>
+                    <button mat-button><mat-icon>add</mat-icon> Create Channel</button>
+                    <span>No channels yet</span>
                 </ng-template>
             </ng-container>
+
+            <div class="line"></div>
 
             <button mat-button (click)="showDMs = !showDMs">
                 Direct Messages
@@ -63,12 +72,14 @@
             </button>
             <ng-container *ngIf="showDMs">
                 <ng-container *ngIf="directMessages() && directMessages().length; else noDMBig">
+                    <button mat-button><mat-icon>add</mat-icon> Write Someone</button>
                     <button mat-button *ngFor="let dm of directMessages()"
                         (click)="switchToChannel(dm)"><mat-icon>3p</mat-icon> {{returnChatpartner(dm.members)}}
                     </button>
                 </ng-container>
                 <ng-template #noDMBig>
-                    <span>Write another user to see the direct messages here</span>
+                    <button mat-button><mat-icon>add</mat-icon> Write Someone</button>
+                    <span>No messages yet</span>
                 </ng-template>
             </ng-container>
         </div>
@@ -144,9 +155,9 @@
         <ng-template #showButton>
             <div class="empty-channel">
                 <span>Join or create a channel</span>
-                <button mat-raised-button>Join Channel</button>
-                <button mat-raised-button>Create Channel</button>
-                <button mat-raised-button>Write Direct Message</button>
+                <button mat-raised-button><mat-icon>login</mat-icon> Join Channel</button>
+                <button mat-raised-button><mat-icon>add</mat-icon> Create Channel</button>
+                <button mat-raised-button><mat-icon>add</mat-icon> Write Direct Message</button>
             </div>
         </ng-template>
     </div>

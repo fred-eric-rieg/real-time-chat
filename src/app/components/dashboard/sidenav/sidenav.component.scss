@@ -37,3 +37,15 @@
         justify-content: flex-start;
     }
 }
+
+.empty-channel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.line {
+    height: 0;
+    width: 100%;
+    border: 1px solid var(--border);
+}
