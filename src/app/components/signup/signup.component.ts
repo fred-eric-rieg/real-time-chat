@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+import { Component } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,8 +18,6 @@ import { CommonModule } from '@angular/common';
 })
 export class SignupComponent {
 
-  @ViewChild('signupBtn') signupBtn!: MatButton;
-
   signupForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     fullName: new FormControl('', [Validators.required]),
@@ -28,7 +26,7 @@ export class SignupComponent {
   }, { validators: [this.passwordsMatchValidator] });
 
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(private router: Router) {}
 
 
   passwordsMatchValidator(form: AbstractControl): ValidationErrors | null {
