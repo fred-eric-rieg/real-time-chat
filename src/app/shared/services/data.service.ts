@@ -187,11 +187,11 @@ export class DataService {
   ]
 
 
-  private user = signal<Member>({ id: 0, fullName: "Administrator", image: "profile8.jpg", contacts: [0], email: "mail@dev.de" });
+  private user = signal<Member | null>(null);
 
-  private contacts = signal<ShortMember[]>([{ id: 0, fullName: "Member", image: "profile8.jpg" }]);
+  private contacts = signal<ShortMember[]>([]);
 
-  private currentChannel = signal<Channel>(this.dummyCurrentChannel);
+  private currentChannel = signal<Channel | null>(null);
 
   private allChannels = signal<Channel[]>([]);
 
@@ -212,7 +212,7 @@ export class DataService {
   }
 
 
-  getUser() {
+  getUser(): Signal<Member | null> {
     return this.user;
   }
 
@@ -222,7 +222,7 @@ export class DataService {
   }
 
 
-  getContacts() {
+  getContacts(): Signal<ShortMember[]> {
     return this.contacts;
   }
 
@@ -232,7 +232,7 @@ export class DataService {
   }
 
 
-  getCurrentChannel(): Signal<Channel> {
+  getCurrentChannel(): Signal<Channel | null> {
     return this.currentChannel;
   }
 
@@ -337,7 +337,7 @@ export class DataService {
         created: new Date(),
         createdBy: this.dummyUser,
         content: message,
-        channel: currentChannel().id
+        channel: currentChannel()?.id || 0
       },]
     );
     this.setMessages(combined);
