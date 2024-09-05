@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   login() {
-    this.router.navigate(["/dashboard/channel/1"]);
+    this.router.navigate(["/dashboard/channel/0"]);
   }
 
 
