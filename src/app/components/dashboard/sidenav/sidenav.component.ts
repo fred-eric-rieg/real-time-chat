@@ -6,11 +6,12 @@ import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavService } from '../../../shared/services/sidenav.service';
 import { Channel, DataService, Member, ShortMember } from '../../../shared/services/data.service';
 import { Router } from '@angular/router';
+import { JoinChannelDirective } from '../../../shared/directives/join-channel.directive';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [MatSidenavModule, MatButtonModule, MatIconModule, CommonModule],
+  imports: [MatSidenavModule, MatButtonModule, MatIconModule, CommonModule, JoinChannelDirective],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })

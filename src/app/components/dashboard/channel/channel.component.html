@@ -20,7 +20,7 @@
                     </ng-container>
                     <ng-template #noChannelsSmall>
                         <span>No channels yet</span>
-                        <button mat-menu-item><mat-icon>login</mat-icon> Join Channel</button>
+                        <button mat-menu-item joinChannel><mat-icon>login</mat-icon> Join Channel</button>
                         <button mat-menu-item><mat-icon>add</mat-icon> Create Channel</button>
                     </ng-template>
                 </mat-menu>
@@ -51,13 +51,13 @@
             </button>
             <ng-container *ngIf="showChannels">
                 <ng-container *ngIf="channels() && channels().length; else noChannelsBig">
-                    <button mat-button><mat-icon>login</mat-icon> Join Channel</button>
+                    <button mat-button joinChannel><mat-icon>login</mat-icon> Join Channel</button>
                     <button mat-button><mat-icon>add</mat-icon> Create Channel</button>
                     <button mat-button *ngFor="let channel of channels()"
                         (click)="switchToChannel(channel)"><mat-icon>forum</mat-icon> {{channel.name}}</button>
                 </ng-container>
                 <ng-template #noChannelsBig>
-                    <button mat-button><mat-icon>login</mat-icon> Join Channel</button>
+                    <button mat-button joinChannel><mat-icon>login</mat-icon> Join Channel</button>
                     <button mat-button><mat-icon>add</mat-icon> Create Channel</button>
                     <span>No channels yet</span>
                 </ng-template>
@@ -155,7 +155,7 @@
         <ng-template #showButton>
             <div class="empty-channel">
                 <span>Join or create a channel</span>
-                <button mat-raised-button><mat-icon>login</mat-icon> Join Channel</button>
+                <button mat-raised-button joinChannel><mat-icon>login</mat-icon> Join Channel</button>
                 <button mat-raised-button><mat-icon>add</mat-icon> Create Channel</button>
                 <button mat-raised-button><mat-icon>add</mat-icon> Write Direct Message</button>
             </div>

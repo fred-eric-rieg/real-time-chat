@@ -8,12 +8,13 @@ import { MatCardModule } from '@angular/material/card';
 import { QuillBubbleComponent } from "../quill-bubble/quill-bubble.component";
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { JoinChannelDirective } from '../../../shared/directives/join-channel.directive';
 
 
 @Component({
   selector: 'app-channel',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, CommonModule, MatMenuModule, MatCardModule, QuillBubbleComponent],
+  imports: [MatButtonModule, MatIconModule, CommonModule, MatMenuModule, MatCardModule, QuillBubbleComponent, JoinChannelDirective],
   templateUrl: './channel.component.html',
   styleUrl: './channel.component.scss'
 })

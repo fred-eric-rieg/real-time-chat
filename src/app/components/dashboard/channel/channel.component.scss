@@ -113,9 +113,9 @@
 }
 
 .line {
-    height: 0;
+    height: 2px;
     width: 100%;
-    border: 1px solid var(--border);
+    background-color: var(--border);
 }
 
 @media screen and (max-width: 1024px) {

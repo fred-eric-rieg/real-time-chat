@@ -24,7 +24,7 @@
             </button>
 
             <ng-container *ngIf="showChannels">
-                <button mat-button><mat-icon>login</mat-icon> Join Channel</button>
+                <button mat-button joinChannel><mat-icon>login</mat-icon> Join Channel</button>
                 <button mat-button><mat-icon>add</mat-icon> Create Channel</button>
 
                 <span *ngIf="!channels().length">No channels yet</span>
