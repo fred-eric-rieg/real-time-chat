@@ -1,16 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, Signal, signal } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { Member, ShortMember } from '../../../shared/services/data.service';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'createChannel',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule, MatInputModule, CommonModule],
   templateUrl: './create-channel.component.html',
   styleUrl: './create-channel.component.scss'
 })
 export class CreateChannelComponent {
 
+  user: Signal<Member | null> = signal({ fullName: "Hans Dieter", id: 1, image: "profile8.jpg", email: "hansi@mail.de" });
+
+  contacts: Signal<ShortMember[]> = signal([{ fullName: "Hans Dieter", id: 1, image: "profile8.jpg" }, { fullName: "Klausi Mayer", id: 2, image: "profile8.jpg" },]);
+
+  channelForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    members: new FormControl([{ fullName: this.user()?.fullName, id: this.user()?.id, image: this.user()?.image }], [Validators.required]),
+    description: new FormControl('', [Validators.required])
+  });
+
+
   constructor(public dialogRef: MatDialogRef<CreateChannelComponent>) {}
+
+  
+  ngOnInit(): void {
+    
+  }
+
+
+  createChannel() {
+    console.log(this.channelForm.value);
+    this.dialogRef.close();
+  }
 
 }

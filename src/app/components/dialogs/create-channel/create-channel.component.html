@@ -1,11 +1,46 @@
 <div class="dialog">
     <p>Create Channel</p>
 
+    <form [formGroup]="channelForm" (ngSubmit)="createChannel()">
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Channel Name</mat-label>
+            <input matInput type="text" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Members</mat-label>
+            <mat-select multiple formControlName="members">
+
+                <mat-select-trigger>
+                    {{ channelForm.controls['members'].value?.[0]!.fullName || '' }}
+                    @if ((channelForm.controls['members'].value?.length || 0) > 1) {
+                    <span>
+                        (+{{ (channelForm.controls['members'].value?.length || 0) - 1}} {{
+                        channelForm.controls['members'].value?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                    }
+                </mat-select-trigger>
+
+                @for (contact of contacts(); track contact) {
+                <mat-option [value]="contact">{{contact.fullName}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <div mat-dialog-actions style="display: flex; gap: 16px; justify-content: space-between;">
+            <button mat-raised-button (click)="dialogRef.close();">Cancel</button>
+            <button mat-raised-button type="submit" [disabled]="channelForm.invalid" #createBtn>Create Channel</button>
+        </div>
 
 
-    <div mat-dialog-actions>
-        <button mat-raised-button (click)="dialogRef.close();">Cancel</button>
-    </div>
+
+    </form>
+
+
 </div>
-
-
