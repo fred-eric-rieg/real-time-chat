@@ -1,0 +1,8 @@
+.dialog {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    background-color: var(--text);
+    border: 2px solid var(--border);
+    border-radius: 28px;
+}

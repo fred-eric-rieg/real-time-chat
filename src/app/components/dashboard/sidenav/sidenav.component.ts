@@ -7,11 +7,13 @@ import { SidenavService } from '../../../shared/services/sidenav.service';
 import { Channel, DataService, Member, ShortMember } from '../../../shared/services/data.service';
 import { Router } from '@angular/router';
 import { JoinChannelDirective } from '../../../shared/directives/join-channel.directive';
+import { CreateChannelDirective } from '../../../shared/directives/create-channel.directive';
+import { WriteDirectMessageDirective } from '../../../shared/directives/write-direct-message.directive';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [MatSidenavModule, MatButtonModule, MatIconModule, CommonModule, JoinChannelDirective],
+  imports: [MatSidenavModule, MatButtonModule, MatIconModule, CommonModule, JoinChannelDirective, CreateChannelDirective, WriteDirectMessageDirective],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })

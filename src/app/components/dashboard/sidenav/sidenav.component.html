@@ -25,7 +25,7 @@
 
             <ng-container *ngIf="showChannels">
                 <button mat-button joinChannel><mat-icon>login</mat-icon> Join Channel</button>
-                <button mat-button><mat-icon>add</mat-icon> Create Channel</button>
+                <button mat-button createChannel><mat-icon>add</mat-icon> Create Channel</button>
 
                 <span *ngIf="!channels().length">No channels yet</span>
 
@@ -46,7 +46,7 @@
             <ng-container *ngIf="showDMs">
 
 
-                <button mat-button><mat-icon>add</mat-icon> Write Someone</button>
+                <button mat-button writeDirectMessage><mat-icon>add</mat-icon> Write Someone</button>
 
                 <span *ngIf="!directMessages().length">No messages yet</span>
 

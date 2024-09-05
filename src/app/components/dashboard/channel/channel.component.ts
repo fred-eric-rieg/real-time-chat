@@ -9,12 +9,14 @@ import { QuillBubbleComponent } from "../quill-bubble/quill-bubble.component";
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { JoinChannelDirective } from '../../../shared/directives/join-channel.directive';
+import { CreateChannelDirective } from '../../../shared/directives/create-channel.directive';
+import { WriteDirectMessageDirective } from '../../../shared/directives/write-direct-message.directive';
 
 
 @Component({
   selector: 'app-channel',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, CommonModule, MatMenuModule, MatCardModule, QuillBubbleComponent, JoinChannelDirective],
+  imports: [MatButtonModule, MatIconModule, CommonModule, MatMenuModule, MatCardModule, QuillBubbleComponent, JoinChannelDirective, CreateChannelDirective, WriteDirectMessageDirective],
   templateUrl: './channel.component.html',
   styleUrl: './channel.component.scss'
 })
