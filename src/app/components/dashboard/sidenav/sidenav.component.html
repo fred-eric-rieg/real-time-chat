@@ -1,9 +1,11 @@
+<div class="overlay" [class.visible]="drawer.opened" (click)="this.drawer.toggle()"></div>
+
 <mat-drawer-container autosize class="sidenav-container">
 
     <mat-drawer #drawer class="sidenav" mode="side">
 
         <div class="top-area">
-            <button mat-icon-button (click)="drawer.toggle()">
+            <button mat-icon-button (click)="this.drawer.toggle()">
                 <mat-icon>close</mat-icon>
             </button>
             <span>Hello, {{user()?.fullName || "Unknown"}}.</span>
