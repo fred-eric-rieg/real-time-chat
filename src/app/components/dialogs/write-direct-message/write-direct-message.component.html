@@ -1,9 +1,20 @@
 <div class="dialog">
-    <p>Write Direct Message</p>
+    <p>Whom' you want to write?</p>
+
+    <form>
+        <mat-form-field style="width: 100%;">
+          <mat-label>Select Someone</mat-label>
+          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            @for (option of filteredOptions | async; track option) {
+              <mat-option [value]="option" (click)="writeContact(option)">{{option.fullName}}</mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      
 
     <div mat-dialog-actions>
         <button mat-raised-button (click)="dialogRef.close();">Cancel</button>
     </div>
 </div>
-
-
