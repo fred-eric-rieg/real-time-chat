@@ -1,9 +1,25 @@
 <div class="dialog">
     <p>Join Channel</p>
 
-    <div mat-dialog-actions>
-        <button mat-raised-button (click)="dialogRef.close();">Cancel</button>
-    </div>
+    <form [formGroup]="channelForm" (ngSubmit)="joinChannel()">
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Channels</mat-label>
+            <mat-select formControlName="name">
+                @for (channel of channels(); track channel) {
+                <mat-option [value]="channel">{{channel.name}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <div mat-dialog-actions style="display: flex; gap: 16px; justify-content: space-between;">
+            <button mat-raised-button (click)="dialogRef.close();">Cancel</button>
+            <button mat-raised-button type="submit" [disabled]="channelForm.invalid" #joinBtn>Join Channel</button>
+        </div>
+
+    </form>
+
+    
 </div>
 
 
