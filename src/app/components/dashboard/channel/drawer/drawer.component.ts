@@ -24,8 +24,6 @@ export class DrawerComponent {
 
   @ViewChild('leftmenu') leftmenu!: ElementRef;
 
-  @Output() isDrawerExpanded = new EventEmitter<boolean>();
-
   isShrunk = false;
   showChannels = false;
   showDMs = false;
@@ -36,11 +34,9 @@ export class DrawerComponent {
   toggleLeftMenu() {
     const leftMenuEl = this.leftmenu.nativeElement;
     if (leftMenuEl.classList.contains('shrink')) {
-      this.isDrawerExpanded.emit(true);
       this.renderer.removeClass(leftMenuEl, 'shrink');
       this.isShrunk = false;
     } else {
-      this.isDrawerExpanded.emit(false);
       this.renderer.addClass(leftMenuEl, 'shrink');
       this.isShrunk = true;
     }

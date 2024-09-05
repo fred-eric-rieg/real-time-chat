@@ -32,13 +32,13 @@ export class ChannelComponent {
   messages: Signal<Message[] | []> = signal([]);
 
   constructor(public dataService: DataService, private sanitizer: DomSanitizer, private router: Router) {};
-
+  
 
   getSanitizedMessage(message: string) {
     return this.sanitizer.sanitize(SecurityContext.HTML, message);
   }
 
-  
+
   scrollToLatestMessage(isMessageSent: boolean) {
     const element = this.messagesArea.nativeElement;
     if (isMessageSent) {

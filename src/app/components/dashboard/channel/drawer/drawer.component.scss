@@ -35,6 +35,10 @@
     background-color: var(--border);
 }
 
+.shrink {
+    width: 56px;
+    min-width: 56px;
+}
 
 @media screen and (max-width: 1024px) {
     .left-menu-area {

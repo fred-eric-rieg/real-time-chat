@@ -1,8 +1,8 @@
 <div class="main-container">
 
-    <app-drawer (isDrawerExpanded)="isDrawerExpanded"></app-drawer>
+    <app-drawer></app-drawer>
 
-    <div class="content-container" [class.hide-overflow]="isDrawerExpanded">
+    <div class="content-container">
 
         <ng-container *ngIf="channel(); else showButton">
             <div class="content-top-area">
@@ -68,7 +68,7 @@
             </div>
 
         </ng-container>
-        
+
         <ng-template #showButton>
             <div class="empty-channel">
                 <span>Join or create a channel</span>

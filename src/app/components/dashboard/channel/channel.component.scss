@@ -38,14 +38,6 @@
     white-space: wrap;
 }
 
-.hide-overflow {
-    flex-grow: 1;
-    flex-shrink: 1;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Show ellipsis when text overflows */
-    white-space: nowrap; /* Prevent text from wrapping */
-}
-
 .members-list {
     display: flex;
     align-items: center;
@@ -67,11 +59,6 @@
 
 .description {
     white-space: wrap;
-}
-
-.shrink {
-    width: 56px;
-    min-width: 56px;
 }
 
 .empty-channel {
