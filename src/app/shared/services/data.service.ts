@@ -5,7 +5,6 @@ export interface Member {
   fullName: string,
   id: number,
   image: string,
-  contacts: number[],
   email: string,
 }
 
@@ -42,7 +41,6 @@ export class DataService {
       fullName: "Hans Dieter",
       id: 1,
       image: "profile8.jpg",
-      contacts: [1, 2, 3, 4, 5, 6],
       email: "hansdieter@mail.de"
     }
 
