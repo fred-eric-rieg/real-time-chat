@@ -1,4 +1,5 @@
-import { Injectable, Signal, signal } from '@angular/core';
+import { inject, Injectable, Signal, signal } from '@angular/core';
+import { Database } from '@angular/fire/database';
 
 
 export interface Member {
@@ -35,6 +36,8 @@ export interface Message {
   providedIn: 'root'
 })
 export class DataService {
+
+  private db: Database = inject(Database);
 
   dummyUser: Member =
     {
