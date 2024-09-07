@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../shared/services/auth.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class SignupComponent {
   }, { validators: [this.passwordsMatchValidator] });
 
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
 
   passwordsMatchValidator(form: AbstractControl): ValidationErrors | null {
@@ -42,8 +43,15 @@ export class SignupComponent {
   }
 
 
-  signup() {
-    this.router.navigate(["/login"], { queryParams: { emailSnackbar: true }});
+  async signup() {
+    const user = this.signupForm.value;
+    if (user.email && user.password && user.fullName) {
+      let resp = await this.authService.create(user.email, user.password, user.fullName);
+      console.log(resp);
+      //this.router.navigate(["/login"], { queryParams: { emailSnackbar: true }});
+    }
+    
+    
   }
 
 
