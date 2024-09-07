@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { getDatabase, ref, set } from '@angular/fire/database';
+import { getStorage } from '@angular/fire/storage';
 
 export interface Member {
   fullName: string,
