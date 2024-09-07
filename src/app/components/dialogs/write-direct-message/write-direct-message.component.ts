@@ -46,7 +46,7 @@ export class WriteDirectMessageComponent implements OnInit {
   private _filter(name: string): ShortMember[] {
     const filterValue = name.toLowerCase();
 
-    return this.members()?.filter(option => option.fullName.toLowerCase().includes(filterValue)) || [{ fullName: '', id: 0, image: ''}];
+    return this.members()?.filter(option => option.fullName.toLowerCase().includes(filterValue)) || [{ fullName: '', id: "abc", image: ''}];
   }
 
 

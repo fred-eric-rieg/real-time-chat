@@ -17,9 +17,9 @@ import { CommonModule } from '@angular/common';
 })
 export class CreateChannelComponent {
 
-  user: Signal<Member | null> = signal({ fullName: "Hans Dieter", id: 1, image: "profile8.jpg", email: "hansi@mail.de" });
+  user: Signal<Member | null> = signal({ fullName: "Hans Dieter", id: "abz", image: "profile8.jpg", email: "hansi@mail.de" });
 
-  contacts: Signal<ShortMember[]> = signal([{ fullName: "Hans Dieter", id: 1, image: "profile8.jpg" }, { fullName: "Klausi Mayer", id: 2, image: "profile8.jpg" },]);
+  contacts: Signal<ShortMember[]> = signal([{ fullName: "Hans Dieter", id: "abc", image: "profile8.jpg" }, { fullName: "Klausi Mayer", id: "def", image: "profile8.jpg" },]);
 
   channelForm = new FormGroup({
     name: new FormControl('', [Validators.required]),

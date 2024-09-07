@@ -21,7 +21,7 @@ export class JoinChannelComponent {
     name: new FormControl('', [Validators.required])
   });
 
-  channels: Signal<Channel[]> = signal([ {id: 0, name: "unset", created: new Date(), members: [], description: "nothing", createdBy: {fullName: "no", id: 0, image: ""} } ]);
+  channels: Signal<Channel[]> = signal([ {id: "abc", name: "unset", created: new Date(), members: [], description: "nothing", createdBy: {fullName: "no", id: "abc", image: ""} } ]);
 
   constructor(public dialogRef: MatDialogRef<JoinChannelComponent>) {}
 
