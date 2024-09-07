@@ -31,7 +31,11 @@
 
                 <mat-form-field>
                     <mat-label>Password</mat-label>
-                    <input type="password" matInput formControlName="password" placeholder="Set Password">
+                    <input type="password" matInput formControlName="password" placeholder="Set Password" [type]="hide() ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide()">
+                        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                     @if (signupForm.get('password')?.hasError('required')) {
                     <mat-error>Password is <strong>required</strong></mat-error>
                     }
@@ -39,7 +43,11 @@
 
                 <mat-form-field>
                     <mat-label>Repeat Password</mat-label>
-                    <input type="password" matInput formControlName="repeat" placeholder="Repeat Password">
+                    <input type="password" matInput formControlName="repeat" placeholder="Repeat Password" [type]="hide() ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide()">
+                        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                     @if (signupForm.get('repeat')?.hasError('required')) {
                     <mat-error>Password is <strong>required</strong></mat-error>
                     }

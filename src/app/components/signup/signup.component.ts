@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -27,6 +27,9 @@ export class SignupComponent {
   }, { validators: [this.passwordsMatchValidator] });
 
 
+  hide = signal(true);
+
+
   constructor(private router: Router, private authService: AuthService) {}
 
 
@@ -40,6 +43,12 @@ export class SignupComponent {
       return { nomatch: true };
     }
     return null;
+  }
+
+  
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
 
 
