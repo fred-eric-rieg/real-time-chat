@@ -4,19 +4,19 @@ import { Database } from '@angular/fire/database';
 
 export interface Member {
   fullName: string,
-  id: number,
+  id: string,
   image: string,
   email: string,
 }
 
 export interface ShortMember {
   fullName: string,
-  id: number,
+  id: string,
   image: string,
 }
 
 export interface Channel {
-  id: number,
+  id: string,
   created: Date,
   name: string,
   description: string,
@@ -25,11 +25,11 @@ export interface Channel {
 }
 
 export interface Message {
-  id: number,
+  id: string,
   created: Date,
   createdBy: ShortMember,
   content: string,
-  channel: number
+  channel: string
 }
 
 @Injectable({
@@ -38,155 +38,6 @@ export interface Message {
 export class DataService {
 
   private db: Database = inject(Database);
-
-  dummyUser: Member =
-    {
-      fullName: "Hans Dieter",
-      id: 1,
-      image: "profile8.jpg",
-      email: "hansdieter@mail.de"
-    }
-
-
-  dummyContacts: ShortMember[] = [
-    { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
-    { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
-    { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
-    { fullName: "Marie Löffel", id: 4, image: "profile8.jpg" },
-    { fullName: "Renate Bäcker", id: 5, image: "profile8.jpg" },
-    { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
-  ]
-
-
-  dummyMessages: Message[] = [
-    {
-      id: 1,
-      created: new Date(),
-      createdBy: { id: 1, fullName: "Dieter Müller", image: "/profile8.jpg" },
-      content: "First Message of the Day.",
-      channel: 1
-    },
-    {
-      id: 2,
-      created: new Date(),
-      createdBy: { id: 1, fullName: "Dieter Müller", image: "profile8.jpg" },
-      content: "Second Message of the Day.",
-      channel: 1
-    },
-    {
-      id: 3,
-      created: new Date(),
-      createdBy: { id: 1, fullName: "Dieter Müller", image: "profile8.jpg" },
-      content: "Third Message of the Day.",
-      channel: 1
-    },
-    {
-      id: 4,
-      created: new Date(),
-      createdBy: { id: 1, fullName: "Dieter Müller", image: "profile8.jpg" },
-      content: "I am writing a very long text in order to see the impact on the UI when writing that much. In fact, there is even more. Let me elaborate.",
-      channel: 1
-    },
-  ]
-
-
-  dummyCurrentChannel: Channel =
-    {
-      id: 1,
-      created: new Date(),
-      name: "Main Channel",
-      description: "Another channel about general stuff.",
-      createdBy: { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
-      members: [
-        { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
-        { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
-        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
-        { fullName: "Marie Löffel", id: 4, image: "profile8.jpg" },
-        { fullName: "Renate Bäcker", id: 5, image: "profile8.jpg" },
-        { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
-      ]
-    }
-
-
-  dummyAllChannels: Channel[] = [
-    {
-      id: 1,
-      created: new Date(),
-      name: "Main Channel",
-      description: "Another channel about general stuff.",
-      createdBy: { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
-      members: [
-        { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
-        { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
-        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
-        { fullName: "Marie Löffel", id: 4, image: "profile8.jpg" },
-        { fullName: "Renate Bäcker", id: 5, image: "profile8.jpg" },
-        { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
-      ]
-    },
-    {
-      id: 2,
-      created: new Date(),
-      name: "Second Channel",
-      description: "Another channel about specific stuff.",
-      createdBy: { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
-      members: [
-        { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
-        { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
-        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
-      ]
-    },
-    {
-      id: 3,
-      created: new Date(),
-      name: "Third Channel",
-      description: "Another channel about nieche stuff.",
-      createdBy: { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
-      members: [
-        { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
-        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
-        { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
-      ]
-    }
-  ]
-
-
-  dummyAllDMs: Channel[] = [
-    {
-      id: 4,
-      created: new Date(),
-      name: "Direct Message",
-      description: "Just between you and a friend.",
-      createdBy: { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
-      members: [
-        { fullName: "Thomas Müller", id: 2, image: "profile8.jpg" },
-        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
-      ]
-    },
-    {
-      id: 5,
-      created: new Date(),
-      name: "Direct Message",
-      description: "Just between you and a friend.",
-      createdBy: { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
-      members: [
-        { fullName: "Klausi Mayer", id: 3, image: "profile8.jpg" },
-        { fullName: "Hans Dieter", id: 1, image: "profile8.jpg" },
-      ]
-    },
-    {
-      id: 6,
-      created: new Date(),
-      name: "Direct Message",
-      description: "Just between you and a friend.",
-      createdBy: { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
-      members: [
-        { fullName: "Ingrid Kaiser", id: 6, image: "profile8.jpg" },
-        { fullName: "Renate Bäcker", id: 5, image: "profile8.jpg" },
-      ]
-    }
-  ]
-
 
   private user = signal<Member | null>(null);
 
@@ -284,7 +135,7 @@ export class DataService {
    * Simulated API call to fetch the current logged-in user.
    */
   fetchUser() {
-    this.setUser(this.dummyUser);
+    //this.setUser(this.dummyUser);
   }
 
 
@@ -292,7 +143,7 @@ export class DataService {
    * Simulated API call to fetch the contacts of the logged-in user.
    */
   fetchContacts() {
-    this.setContacts(this.dummyContacts);
+    //this.setContacts(this.dummyContacts);
   }
 
 
@@ -300,14 +151,12 @@ export class DataService {
    * Simulated API call to fetch all Channels for the current logged-in user.
    */
   fetchChannels() {
-    let filteredChannels = this.dummyAllChannels.filter(channel => channel.members.some(member => member.id === this.dummyUser.id));
-    this.setAllChannels(filteredChannels);
+    //this.setAllChannels(filteredChannels);
   }
 
 
-  fetchCurrentChannel(id: number) {
-    let currentChannel = this.dummyAllChannels.find(channel => channel.id === id);
-    this.setCurrentChannel(currentChannel || this.dummyCurrentChannel);
+  fetchCurrentChannel(id: string) {
+    //this.setCurrentChannel(currentChannel || this.dummyCurrentChannel);
   }
 
 
@@ -315,33 +164,20 @@ export class DataService {
    * Simulated API call to fetch all Direct Message Channels for the current logged-in user.
    */
   fetchDirectMessages() {
-    let filteredDMs = this.dummyAllDMs.filter(dm => dm.members.some(member => member.id === this.dummyUser.id));
-    this.setAllDirectMessages(filteredDMs);
+    //this.setAllDirectMessages(filteredDMs);
   }
 
 
   /**
    * Simulated API call to fetch all Messages of a particular Channel or Direct Message Channel.
    */
-  fetchMessages(id: number) {
-    let filteredMessages = this.dummyMessages.filter(message => message.channel === id);
-    this.setMessages(filteredMessages); // For demo the messages main channel is always loaded first.
+  fetchMessages(id: string) {
+    //this.setMessages(filteredMessages); // For demo the messages main channel is always loaded first.
   }
 
 
   sendMessage(message: string) {
-    let old = this.getMessages();
-    let currentChannel = this.getCurrentChannel()
-    let combined = old().concat(
-      [{
-        id: old().length + 1,
-        created: new Date(),
-        createdBy: this.dummyUser,
-        content: message,
-        channel: currentChannel()?.id || 0
-      },]
-    );
-    this.setMessages(combined);
+    //
   }
 
 }
