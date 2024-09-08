@@ -13,30 +13,31 @@
     </div>
 
     <div class="details" *ngIf="isEditing">
-        <form>
+
+        <form [formGroup]="accountForm" (ngSubmit)="updateProfile()">
 
             <div class="image-input">
                 <mat-label>Profile Picture</mat-label>
                 <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-                <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+                <input hidden (change)="onFileSelected($event)" #fileInput type="file" formControlName="image">
                 <mat-hint>Selected: {{temporaryImg}}</mat-hint>
             </div>
 
             <mat-form-field>
                 <mat-label>Full Name</mat-label>
-                <input matInput [value]="user()?.fullName">
+                <input matInput formControlName="fullName">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input matInput [value]="user()?.email">
+                <input matInput formControlName="email">
             </mat-form-field>
+
+            <div class="btn-container">
+                <button mat-button (click)="isEditing = !isEditing" type="button">Cancel</button>
+                <button mat-raised-button [disabled]="accountForm.invalid">Update</button>
+            </div>
         </form>
 
-        <div class="btn-container">
-            <button mat-button (click)="isEditing = !isEditing">Cancel</button>
-            <button mat-raised-button (click)="updateProfile()">Update</button>
-        </div>
-        
     </div>
 </div>
