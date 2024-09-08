@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit, signal, Signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, signal, Signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
@@ -10,6 +10,8 @@ import { JoinChannelDirective } from '../../../shared/directives/join-channel.di
 import { CreateChannelDirective } from '../../../shared/directives/create-channel.directive';
 import { WriteDirectMessageDirective } from '../../../shared/directives/write-direct-message.directive';
 import { MemberService } from '../../../shared/services/member.service';
+import { AuthService } from '../../../shared/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sidenav',
@@ -19,6 +21,7 @@ import { MemberService } from '../../../shared/services/member.service';
   styleUrl: './sidenav.component.scss'
 })
 export class SidenavComponent implements AfterViewInit, OnInit {
+  private _snackBar = inject(MatSnackBar);
   showFiller = false;
 
   @ViewChild('drawer') drawer!: MatDrawer;
@@ -32,10 +35,12 @@ export class SidenavComponent implements AfterViewInit, OnInit {
   directMessage: Signal<Channel[]> = signal([]);;
   directMessages: Signal<Channel[]> = signal([]);;
 
-  user: Signal<Member | null> = signal(null);;
+  user: Signal<Member | null> = signal(null);
+
+ 
 
 
-  constructor(private sidenavService: SidenavService, private dataService: DataService, private router: Router, private memberService: MemberService) { }
+  constructor(private sidenavService: SidenavService, private dataService: DataService, private router: Router, private memberService: MemberService, private authService: AuthService) { }
 
 
   ngOnInit(): void {
@@ -63,11 +68,21 @@ export class SidenavComponent implements AfterViewInit, OnInit {
 
 
   logout() {
-    this.router.navigate(["/login"]);
+    this.authService.logout().then( () => {
+      this.router.navigate(["/login"]);
+    }).catch((error) => {
+      this.openSnackBar("Error while logging out.", "Mkay", {duration: 5000});
+    });
   }
+
 
   goToAccount() {
     this.drawer.toggle();
     this.router.navigate(["dashboard/account"]);
+  }
+
+
+  openSnackBar(message: string, action: string, arg2: { duration: number; }) {
+    this._snackBar.open(message, action, arg2);
   }
 }
