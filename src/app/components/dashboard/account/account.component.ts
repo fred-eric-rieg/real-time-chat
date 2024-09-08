@@ -1,12 +1,13 @@
-import { Component, OnInit, signal, Signal, ViewChild } from '@angular/core';
+import { Component, OnInit, signal, Signal, ViewChild, WritableSignal } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { SidenavComponent } from '../sidenav/sidenav.component';
-import { DataService, Member } from '../../../shared/services/data.service';
+import { Member } from '../../../shared/services/data.service';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MemberService } from '../../../shared/services/member.service';
 
 @Component({
   selector: 'app-account',
@@ -18,17 +19,18 @@ import { MatInputModule } from '@angular/material/input';
 export class AccountComponent implements OnInit {
   isEditing = false;
 
-  user: Signal<Member | null> = signal(null);
+  user = signal<Member | null>(null);
 
   temporaryImg = this.user()?.image;
 
   @ViewChild('fileInput') fileInput!: HTMLInputElement;
 
-  constructor(private dataService: DataService) {}
+  constructor(private memberService: MemberService) {}
 
 
-  ngOnInit(): void {
-    this.user = this.dataService.getUser();
+  async ngOnInit(): Promise<void> {
+    this.user = this.memberService.getUser();
+    this.memberService.fetchUser();
   }
 
 
