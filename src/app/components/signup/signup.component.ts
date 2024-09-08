@@ -20,17 +20,17 @@ import { AuthService } from '../../shared/services/auth.service';
 export class SignupComponent {
 
   signupForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    fullName: new FormControl('', [Validators.required]),
-    password: new FormControl('', Validators.required),
-    repeat: new FormControl('', [Validators.required])
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    fullName: new FormControl(null, [Validators.required]),
+    password: new FormControl(null, Validators.required),
+    repeat: new FormControl(null, [Validators.required])
   }, { validators: [this.passwordsMatchValidator] });
 
 
   hide = signal(true);
 
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) { }
 
 
   passwordsMatchValidator(form: AbstractControl): ValidationErrors | null {
@@ -45,7 +45,7 @@ export class SignupComponent {
     return null;
   }
 
-  
+
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
@@ -56,11 +56,12 @@ export class SignupComponent {
     const user = this.signupForm.value;
     if (user.email && user.password && user.fullName) {
       let resp = await this.authService.create(user.email, user.password, user.fullName);
-      console.log(resp);
-      //this.router.navigate(["/login"], { queryParams: { emailSnackbar: true }});
+      if (resp) {
+        this.router.navigate(["/login"], { queryParams: { emailSnackbar: true } });
+      } else {
+        console.log("Errooooorrrr");
+      }
     }
-    
-    
   }
 
 
