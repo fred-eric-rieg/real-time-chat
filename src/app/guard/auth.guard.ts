@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../shared/services/auth.service';
+import { FirebaseApp } from '@angular/fire/app';
+import { getAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +9,25 @@ import { AuthService } from '../shared/services/auth.service';
 
 export class AuthGuard {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  app: FirebaseApp = inject(FirebaseApp);
+
+
+  constructor(private router: Router) { }
 
   async canActivate(): Promise<boolean> {
+    const auth = getAuth();
     try {
-      return true;
+      if (auth.currentUser) {
+        return true;
+      }
+      else {
+        this.router.navigate(['login']);
+        return false;
+      }
     } catch (error) {
       this.router.navigate(['login']);
       return false;
     }
-    this.router.navigate(['login']);
-    return false;
   }
 
 
