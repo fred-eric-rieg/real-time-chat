@@ -2,13 +2,6 @@ import { inject, Injectable, Signal, signal } from '@angular/core';
 import { Database } from '@angular/fire/database';
 
 
-export interface Member {
-  fullName: string,
-  id: string,
-  image: string,
-  email: string,
-}
-
 export interface ShortMember {
   fullName: string,
   id: string,
@@ -39,8 +32,6 @@ export class DataService {
 
   private db: Database = inject(Database);
 
-  private user = signal<Member | null>(null);
-
   private contacts = signal<ShortMember[]>([]);
 
   private currentChannel = signal<Channel | null>(null);
@@ -55,17 +46,6 @@ export class DataService {
 
 
   constructor() {
-  }
-
-  // Getters and Setters for Signals
-
-  setUser(data: Member) {
-    this.user.set(data);
-  }
-
-
-  getUser(): Signal<Member | null> {
-    return this.user;
   }
 
 
@@ -130,13 +110,6 @@ export class DataService {
 
 
   // API calls to Firestore
-
-  /**
-   * Simulated API call to fetch the current logged-in user.
-   */
-  fetchUser() {
-    //this.setUser(this.dummyUser);
-  }
 
 
   /**
