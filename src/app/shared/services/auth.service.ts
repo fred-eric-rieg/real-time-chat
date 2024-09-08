@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 
-import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, User } from '@angular/fire/auth';
 import { MemberService } from './member.service';
 import { FirebaseStorage } from '@angular/fire/storage';
 import { FirebaseApp } from '@angular/fire/app';
@@ -11,7 +11,9 @@ import { FirebaseApp } from '@angular/fire/app';
 })
 export class AuthService {
 
-  app: FirebaseApp = inject(FirebaseApp)
+  user = signal<User | null>(null)
+
+  app: FirebaseApp = inject(FirebaseApp);
 
   constructor(private memberService: MemberService) { }
 
@@ -22,27 +24,30 @@ export class AuthService {
       .then((userCredential) => {
         // Created
         const user = userCredential.user;
-        this.memberService.setNewUser(user.uid, fullName, email, "");
-        return user;
+        this.memberService.setNewUser(user.uid, fullName, email);
+        return true;
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        return false;
       });
   }
 
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<boolean> {
     const auth = getAuth(this.app);
-    signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
-        const user = userCredential.user;
+        this.user.set(userCredential.user);
+        return true;
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        return false;
       });
   }
 
@@ -55,6 +60,5 @@ export class AuthService {
       // An error happened.
     });
   }
-
 
 }
