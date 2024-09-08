@@ -8,35 +8,35 @@
             </div>
 
 
-            <form [formGroup]="loginForm" class="form">
+            <form [formGroup]="loginForm" class="form" (ngSubmit)="login()">
 
                 <mat-form-field class="example-full-width">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput [formControl]="loginForm.controls.emailFormControl"
+                    <input type="email" matInput formControlName="email"
                         placeholder="Ex. pat@example.com">
-                    @if (loginForm.controls.emailFormControl.hasError('email') &&
-                    !loginForm.controls.emailFormControl.hasError('required')) {
+                    @if (loginForm.controls['email'].hasError('email') &&
+                    !loginForm.controls['email'].hasError('required')) {
                     <mat-error>Please enter a valid email address</mat-error>
                     }
-                    @if (loginForm.controls.emailFormControl.hasError('required')) {
+                    @if (loginForm.controls['email'].hasError('required')) {
                     <mat-error>Email is <strong>required</strong></mat-error>
                     }
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width">
                     <mat-label>Password</mat-label>
-                    <input matInput [formControl]="loginForm.controls.passwordFormControl" placeholder="Your Password"
+                    <input matInput formControlName="password" placeholder="Your Password"
                         [type]="hide() ? 'password' : 'text'">
                     <button mat-icon-button type="button" matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide()">
                         <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-                    @if (loginForm.controls.passwordFormControl.hasError('required')) {
+                    @if (loginForm.controls['password'].hasError('required')) {
                     <mat-error>Password is <strong>required</strong></mat-error>
                     }
                 </mat-form-field>
 
-                <button mat-raised-button (click)="login()">Login</button>
+                <button mat-raised-button type="submit" [disabled]="loginForm.invalid">Login</button>
             </form>
 
         </mat-card-content>

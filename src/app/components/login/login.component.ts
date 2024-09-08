@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -21,18 +22,18 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private _snackBar = inject(MatSnackBar);
 
-  loginForm = new FormGroup({
-    emailFormControl: new FormControl('', [Validators.required, Validators.email]),
-    passwordFormControl: new FormControl('', [Validators.required])
-  });
+  loginForm!: FormGroup;
 
   routeSub!: Subscription;
 
   hide = signal(true);
 
 
-  constructor(private router: Router, private route: ActivatedRoute) {
-    
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService) {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required])
+    });
   }
 
 
@@ -56,8 +57,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
 
-  login() {
-    this.router.navigate(["/dashboard/channel/0"]);
+  async login() {
+    try {
+      let resp = await this.authService.login(this.loginForm.value.email, this.loginForm.value.password);
+      if (resp === true) {
+        this.router.navigate(["/dashboard/channel/0"]);
+      } else {
+        this.openSnackBar("Invalid login credentials.", "Damn", {duration: 5000});
+      }
+    } catch(error) {
+      this.openSnackBar("Error.", "Damn", {duration: 5000});
+    }
   }
 
 
