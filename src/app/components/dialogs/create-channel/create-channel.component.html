@@ -22,8 +22,8 @@
                     }
                 </mat-select-trigger>
 
-                @for (contact of contacts(); track contact) {
-                <mat-option [value]="contact">{{contact.fullName}}</mat-option>
+                @for (member of members(); track member) {
+                <mat-option [value]="member">{{member.fullName}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>

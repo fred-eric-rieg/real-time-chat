@@ -4,9 +4,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { Member, ShortMember } from '../../../shared/services/data.service';
+import { ShortMember } from '../../../shared/services/data.service';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { Member } from '../../../shared/services/member.service';
 
 @Component({
   selector: 'createChannel',
@@ -19,7 +20,7 @@ export class CreateChannelComponent {
 
   user: Signal<Member | null> = signal({ fullName: "Hans Dieter", id: "abz", image: "profile8.jpg", email: "hansi@mail.de" });
 
-  contacts: Signal<ShortMember[]> = signal([{ fullName: "Hans Dieter", id: "abc", image: "profile8.jpg" }, { fullName: "Klausi Mayer", id: "def", image: "profile8.jpg" },]);
+  members: Signal<ShortMember[]> = signal([{ fullName: "Hans Dieter", id: "abc", image: "profile8.jpg" }, { fullName: "Klausi Mayer", id: "def", image: "profile8.jpg" },]);
 
   channelForm = new FormGroup({
     name: new FormControl('', [Validators.required]),

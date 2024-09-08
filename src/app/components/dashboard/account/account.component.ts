@@ -1,13 +1,12 @@
-import { Component, OnInit, signal, Signal, ViewChild, WritableSignal } from '@angular/core';
+import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { SidenavComponent } from '../sidenav/sidenav.component';
-import { Member } from '../../../shared/services/data.service';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MemberService } from '../../../shared/services/member.service';
+import { Member, MemberService } from '../../../shared/services/member.service';
 
 @Component({
   selector: 'app-account',

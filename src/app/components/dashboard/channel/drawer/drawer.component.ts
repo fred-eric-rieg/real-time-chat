@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Output, Renderer2, signal, Signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, signal, Signal, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { Channel, DataService, Member, ShortMember } from '../../../../shared/services/data.service';
+import { Channel, DataService, ShortMember } from '../../../../shared/services/data.service';
 import { Router } from '@angular/router';
 import { JoinChannelDirective } from '../../../../shared/directives/join-channel.directive';
 import { CreateChannelDirective } from '../../../../shared/directives/create-channel.directive';
 import { WriteDirectMessageDirective } from '../../../../shared/directives/write-direct-message.directive';
+import { Member } from '../../../../shared/services/member.service';
 
 @Component({
   selector: 'app-drawer',

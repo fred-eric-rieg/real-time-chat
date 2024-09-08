@@ -4,12 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavService } from '../../../shared/services/sidenav.service';
-import { Channel, DataService, Member, ShortMember } from '../../../shared/services/data.service';
+import { Channel, DataService, ShortMember } from '../../../shared/services/data.service';
 import { Router } from '@angular/router';
 import { JoinChannelDirective } from '../../../shared/directives/join-channel.directive';
 import { CreateChannelDirective } from '../../../shared/directives/create-channel.directive';
 import { WriteDirectMessageDirective } from '../../../shared/directives/write-direct-message.directive';
-import { MemberService } from '../../../shared/services/member.service';
+import { Member, MemberService } from '../../../shared/services/member.service';
 import { AuthService } from '../../../shared/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -36,8 +36,6 @@ export class SidenavComponent implements AfterViewInit, OnInit {
   directMessages: Signal<Channel[]> = signal([]);;
 
   user: Signal<Member | null> = signal(null);
-
- 
 
 
   constructor(private sidenavService: SidenavService, private dataService: DataService, private router: Router, private memberService: MemberService, private authService: AuthService) { }
