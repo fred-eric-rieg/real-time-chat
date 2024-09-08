@@ -30,7 +30,6 @@ export class AccountComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.user = this.memberService.getUser();
-    this.memberService.fetchUser();
   }
 
 

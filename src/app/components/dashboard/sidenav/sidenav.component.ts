@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { JoinChannelDirective } from '../../../shared/directives/join-channel.directive';
 import { CreateChannelDirective } from '../../../shared/directives/create-channel.directive';
 import { WriteDirectMessageDirective } from '../../../shared/directives/write-direct-message.directive';
+import { MemberService } from '../../../shared/services/member.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -34,11 +35,11 @@ export class SidenavComponent implements AfterViewInit, OnInit {
   user: Signal<Member | null> = signal(null);;
 
 
-  constructor(private sidenavService: SidenavService, private dataService: DataService, private router: Router) { }
+  constructor(private sidenavService: SidenavService, private dataService: DataService, private router: Router, private memberService: MemberService) { }
 
 
   ngOnInit(): void {
-
+    this.user = this.memberService.getUser();
   }
 
 

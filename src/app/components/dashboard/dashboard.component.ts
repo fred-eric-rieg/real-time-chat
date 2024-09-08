@@ -3,6 +3,7 @@ import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { RouterModule } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MemberService } from '../../shared/services/member.service';
 
 
 @Component({
@@ -16,8 +17,9 @@ export class DashboardComponent {
 
   private _snackBar = inject(MatSnackBar);
 
-  constructor() {
+  constructor(private memberService: MemberService) {
     this.openSnackBar('Login successfull', 'Mkay', { duration: 5000 });
+    this.memberService.fetchUser();
   }
 
 
